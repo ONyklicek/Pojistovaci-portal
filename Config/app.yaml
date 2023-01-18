@@ -1,0 +1,12 @@
+MySQL:
+    host: database                 #defaul host set to localhost
+    port:                 #defaul port set to 3306
+    name: app_portal
+    user: root
+    password: root
+
+DevMode:
+  TracyBar: true
+  ServerData: true
+
+AplicationName: Pojišťovací portál
