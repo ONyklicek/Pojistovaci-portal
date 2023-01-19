@@ -21,6 +21,14 @@ class Database
     private readonly string|null $dbUser;
     private readonly string|null $dbPassword;
 
+    public function __construct()
+    {
+        self::setDbHost(Bootstrap::$config['MySQL']['host'] ?? 'localhost');
+        self::setDbPort(Bootstrap::$config['MySQL']['port'] ?? '3306');
+        self::setDbUser(Bootstrap::$config['MySQL']['user'] ?? '');
+        self::setDbPassword(Bootstrap::$config['MySQL']['password'] ?? '');
+        self::setDbName(Bootstrap::$config['MySQL']['name'] ?? '');
+    }
 
     /**
      * @param \PDO $PDO
@@ -45,45 +53,80 @@ class Database
     /**
      * @return string
      */
-    protected static function getDbHost(): string
+    public function getDbHost(): string
     {
-        return Bootstrap::$config['MySQL']['host'] ?? 'localhost';
+        return $this->dbHost;
     }
 
     /**
      * @return string
      */
-    protected static function getDbPort(): string
+    public function getDbPort(): string
     {
-        return Bootstrap::$config['MySQL']['port'] ?? '3306';
+        return $this->dbPort;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    protected static function getDbName(): string
+    public function getDbName(): ?string
     {
-        return Bootstrap::$config['MySQL']['name'] ?? '';
+        return $this->dbName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    protected static function getDbUser(): string
+    public function getDbPassword(): ?string
     {
-        return Bootstrap::$config['MySQL']['user'] ?? '';
+        return $this->dbPassword;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    protected static function getDbPassword(): string
+    public function getDbUser(): ?string
     {
-        return Bootstrap::$config['MySQL']['password'] ?? '';
+        return $this->dbUser;
     }
 
+    /**
+     * @param string $dbHost
+     */
+    public function setDbHost(string $dbHost): void
+    {
+        $this->dbHost = $dbHost;
+    }
 
+    /**
+     * @param string|null $dbName
+     */
+    public function setDbName(?string $dbName): void
+    {
+        $this->dbName = $dbName;
+    }
 
+    /**
+     * @param string|null $dbPassword
+     */
+    public function setDbPassword(?string $dbPassword): void
+    {
+        $this->dbPassword = $dbPassword;
+    }
 
+    /**
+     * @param string $dbPort
+     */
+    public function setDbPort(string $dbPort): void
+    {
+        $this->dbPort = $dbPort;
+    }
 
+    /**
+     * @param string|null $dbUser
+     */
+    public function setDbUser(?string $dbUser): void
+    {
+        $this->dbUser = $dbUser;
+    }
 }
