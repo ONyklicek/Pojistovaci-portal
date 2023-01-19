@@ -5,7 +5,7 @@
             "email": "ondrejnyklicek@gmail.com",
             "role": "Developer"
         }
-    ]
+    ],
     "require": {
         "tracy/tracy": "^2.9",
         "fig/http-message-util": "^1.1",
