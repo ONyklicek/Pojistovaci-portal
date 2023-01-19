@@ -21,7 +21,12 @@ class UserModel extends DbModel
      */
     public function getUsers(): array
     {
-        return self::selectAll("SELECT * FROM `users` ORDER BY `user_id`");
+        return self::selectAll("SELECT * FROM users ORDER BY `user_id`");
+    }
+
+    public function getUserId(): array
+    {
+        return self::selectAll("SELECT user_id FROM users WHERE ");
     }
 
     /**

@@ -10,7 +10,6 @@
 namespace App\Core;
 
 use Fig\Http\Message\RequestMethodInterface;
-use JetBrains\PhpStorm\Pure;
 
 class Request implements RequestMethodInterface
 {
@@ -45,7 +44,7 @@ class Request implements RequestMethodInterface
      *
      * @return bool
      */
-    #[Pure] public function isGet(): bool
+     public function isGet(): bool
     {
         return $this->getMethod() === self::METHOD_GET;
     }
@@ -55,7 +54,7 @@ class Request implements RequestMethodInterface
      *
      * @return bool
      */
-    #[Pure] public function isPost(): bool
+    public function isPost(): bool
     {
         return $this->getMethod() === self::METHOD_POST;
     }
@@ -76,21 +75,29 @@ class Request implements RequestMethodInterface
      */
     public function getBody()
     {
-        if(self::isPost()){
-            foreach ($_POST as $key => $value) {
-                $data[$key] = htmlspecialchars($value);
-            }
+        foreach ($_POST as $key => $value) {
+            $data[$key] = ($value);
         }
+
         return $data;
     }
 
-    public function setRouteParams(array$params)
+    /**
+     * @param array $params
+     * @return $this
+     */
+    public function setRouteParams(array $params): static
     {
         $this->routeParams = $params;
         return $this;
     }
 
-    public function getRouteParam($param, $default = null)
+    /**
+     * @param $param
+     * @param $default
+     * @return mixed|null
+     */
+    public function getRouteParam($param, $default = null): mixed
     {
         return $this->routeParams[$param] ?? $default;
     }

@@ -13,15 +13,7 @@ use App\Core\Bootstrap;
 
 class Database
 {
-
     public static $db;
-    private readonly string $dbHost;
-    private readonly string $dbPort;
-    private readonly string|null $dbName;
-    private readonly string|null $dbUser;
-    private readonly string|null $dbPassword;
-
-
     /**
      * @param \PDO $PDO
      */
@@ -81,9 +73,4 @@ class Database
     {
         return Bootstrap::$config['MySQL']['password'] ?? '';
     }
-
-
-
-
-
 }
