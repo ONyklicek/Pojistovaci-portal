@@ -33,7 +33,7 @@ class Database
     /**
      * @param \PDO $PDO
      */
-    public static function connect(): void
+    public function connect(): void
     {
         if (!isset(self::$db)) {
             self::$db = @new \PDO(self::getDns(), self::getDbUser(), self::getDbPassword());
