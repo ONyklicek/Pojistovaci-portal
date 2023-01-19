@@ -44,7 +44,7 @@ class ProductModel extends DbModel
      */
     public function addProduct(array $product): void
     {
-        if (emtpy($product['product_name'])) {
+        if (empty($product['product_name'])) {
             throw new \Exception('Název pojištění nesmí být prázdný.');
         }
 

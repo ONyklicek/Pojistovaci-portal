@@ -95,15 +95,14 @@ class InsuranceController extends Controller
     {
         $insuredModel = new InsuranceModel();
 
-        if(!Application::isAdmin() && $request->getUserId() != $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']) {
+        if(!Application::isAdmin() OR $request->getUserId() != $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']) {
             Application::$app->session->setFlash('warning', 'Pro odstranění tohoto pojistění nemáte dostatečná oprávnění.');
-            Application::$app->response->redirect('/insurances');
         } else {
             $insuredModel->deleteInsurance($request->getRouteParam('id'));
 
             Application::$app->session->setFlash('success', 'Pojistění bylo úspěšně odstraněno.');
-            Application::$app->response->redirect('/insurances');
         }
+        Application::$app->response->redirect('/insurances');
     }
 
 

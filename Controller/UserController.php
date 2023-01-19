@@ -56,6 +56,21 @@ class UserController extends Controller
     }
 
     /**
+     * Výois pojištěnců
+     * @return array|string
+     */
+    public function insureds(): array|string
+    {
+        $head = [
+            'title' => "Pojištěnci"
+        ];
+        $policyholdersModel = new UserModel();
+        $data = $policyholdersModel->getUsersGroup("1");
+
+        return self::render(__FUNCTION__, $head,  $data);
+    }
+
+    /**
      * Editace uživatele
      * @param Request $request
      * @return array|string|string[]|void
@@ -68,11 +83,12 @@ class UserController extends Controller
         ];
 
         $userModel = new UserModel();
-        $formData = $request->getBody();
 
-        if((Application::isAdmin() OR ('user' === 'user'))) {
+
+        if(Application::isAdmin() OR $request->getRouteParam('id') == $request->getUserId()) {
             if ($request->isPost()) {
                 try {
+                    $formData = $request->getBody();
                     $userModel->updateUser($request->getRouteParam('id'), $formData);
 
                     Application::$app->session->setFlash('success', 'Uživatel byl úspěšně aktualizován');

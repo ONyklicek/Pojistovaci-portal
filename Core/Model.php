@@ -23,7 +23,7 @@ abstract class Model
         return [];
     }
 
-    public function validate(array $rules)
+    /* public function validate(array $rules)
     {
         foreach ($this->rules() as $attribute => $rules) {
             $value = $this->{$attribute};
@@ -63,5 +63,5 @@ abstract class Model
             }
         }
         return empty($this->errors);
-    }
+    } */
 }

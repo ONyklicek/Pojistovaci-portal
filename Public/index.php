@@ -25,7 +25,7 @@ $app->router->post('/user/{id}/edit', [\App\Controller\UserController::class, 'e
 $app->router->get('/user/{id}/delete', [\App\Controller\UserController::class, 'deleteUser']);
 $app->router->get('/users', [\App\Controller\UserController::class, 'users']);
 //Pojištěnci
-$app->router->get('/insured', [\App\Controller\InsuredController::class, 'insureds']);
+$app->router->get('/insured', [\App\Controller\UserController::class, 'insureds']);
 
 //Pojištění
 $app->router->get('/insurances', [\App\Controller\InsuranceController::class, 'insurances']);
