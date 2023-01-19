@@ -23,7 +23,7 @@ abstract class Model
         return [];
     }
 
-    
+
     /* public function validate(array $rules)
     {
         foreach ($this->rules() as $attribute => $rules) {

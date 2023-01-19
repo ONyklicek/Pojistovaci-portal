@@ -10,7 +10,6 @@
 namespace App\Core;
 
 use Fig\Http\Message\RequestMethodInterface;
-use JetBrains\PhpStorm\Pure;
 
 class Request implements RequestMethodInterface
 {
