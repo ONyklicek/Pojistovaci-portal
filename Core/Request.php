@@ -10,7 +10,6 @@
 namespace App\Core;
 
 use Fig\Http\Message\RequestMethodInterface;
-use JetBrains\PhpStorm\Pure;
 
 class Request implements RequestMethodInterface
 {
@@ -45,7 +44,7 @@ class Request implements RequestMethodInterface
      *
      * @return bool
      */
-    #[Pure] public function isGet(): bool
+     public function isGet(): bool
     {
         return $this->getMethod() === self::METHOD_GET;
     }
@@ -55,7 +54,7 @@ class Request implements RequestMethodInterface
      *
      * @return bool
      */
-    #[Pure] public function isPost(): bool
+    public function isPost(): bool
     {
         return $this->getMethod() === self::METHOD_POST;
     }
