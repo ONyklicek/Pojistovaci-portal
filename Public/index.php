@@ -25,11 +25,13 @@ $app->router->post('/user/{id}/edit', [\App\Controller\UserController::class, 'e
 $app->router->get('/user/{id}/delete', [\App\Controller\UserController::class, 'deleteUser']);
 $app->router->get('/users', [\App\Controller\UserController::class, 'users']);
 //Pojištěnci
-$app->router->get('/insured', [\App\Controller\UserController::class, 'insureds']);
+$app->router->get('/insureds', [\App\Controller\UserController::class, 'insureds']);
 
 //Pojištění
 $app->router->get('/insurances', [\App\Controller\InsuranceController::class, 'insurances']);
 $app->router->get('/insurance/{id}', [\App\Controller\InsuranceController::class, 'insurance']);
+$app->router->get('/insurance/{id}/edit', [\App\Controller\InsuranceController::class, 'editInsurance']);
+$app->router->post('/insurance/{id}/edit', [\App\Controller\InsuranceController::class, 'editInsurance']);
 $app->router->get('/insurance/add', [\App\Controller\InsuranceController::class, 'addInsurance']);
 $app->router->post('/insurance/add', [\App\Controller\InsuranceController::class, 'addInsurance']);
 $app->router->get('/insurance/{id}/delete', [\App\Controller\InsuranceController::class, 'deleteInsurance']);

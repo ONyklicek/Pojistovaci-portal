@@ -6,12 +6,12 @@
 <form class=" row g-2" method="post">
 <?php bdump($data) ?>
 <div class="form-floating">
-    <select class="form-select form-select-lg mb-3" name="product_id" aria-label="Aktivní">
+    <select class="form-select form-select-lg mb-3" name="product_id" aria-label="Název pojištění">
         <?php foreach ($data['DB'] ?? $data as $product): ?>
             <option value="<?= $product['product_id'] ?>" <?= ($product_id == $product['product_id']) ? 'selected' : null ?>"><?= $product['product_name'] ?></option>
         <?php endforeach; ?>
     </select>
-    <label for="floatingSelect">Aktivní</label>
+    <label for="floatingSelect">Název pojištění</label>
 </div>
 
 
@@ -35,10 +35,3 @@
         <button type="submit" class="btn btn-primary">Sjednat</button>
     </div>
 </form>
-
-<?php bdump($data);?>
-<?php
-
-bdump(\App\Core\Helper::currentDate());
-bdump(\App\Core\Helper::currentDate('+1 day'));
-?>
