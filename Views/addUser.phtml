@@ -10,17 +10,11 @@
     <div class="col-md-6 form-floating">
         <input type="text" name="user_firstname" id="floatingInput" placeholder="Jméno" value="<?= (isset($user_firstname)) ? $user_firstname : null ?>" class="form-control form-control-lg <?php //(isset($model->isError('firstName'))) ? 'is-invalid' : is-valid ?>" />
         <label class="form-label">Jméno</label>
-        <div class="valid-feedback <?php // $model->isError('firstName') ? 'invalid-feedback' : '' ?>">
-            <?php //$model->getFirstError('firstName') ?>
-        </div>
     </div>
 
     <div class="col-md-6 form-floating">
         <input type="text" name="user_lastname" id="floatingInput" placeholder="Příjmení" value="<?= (isset($user_lastname)) ? $user_lastname : null ?>" class="form-control form-control-lg <?php // $model->isError('lastName') ? 'is-invalid': 'is-valid' ?>" />
         <label class="form-label">Příjmení</label>
-        <div class="invalid-feedback <?php // $model->isError('lastName') ? 'invalid-feedback' : '' ?>">
-            <?php //$model->getFirstError('lastName') ?>
-        </div>
     </div>
 
     <div class="col-md-4 form-floating">
@@ -36,34 +30,22 @@
     <div class="col-md-4 form-floating">
         <input type="date" name="user_birthdate" id="floatingInput" placeholder="Datum narození" value="<?= (isset($user_birthdate)) ? $user_birthdate : null ?>" class="pb-05 form-control form-control" />
         <label class="form-label">Datum narození</label>
-        <div class="invalid-feedback <?php // $model->isError('lastName') ? 'invalid-feedback' : '' ?>">
-            <?php //$model->getFirstError('lastName') ?>
-        </div>
     </div>
 
 
     <div class="col-md-12 form-floating">
         <input type="text" name="user_address" id="floatingInput" placeholder="Ulice a číslo popisné" value="<?= (isset($user_address)) ? $user_address : null ?>" class="form-control form-control-lg" />
         <label class="form-label">Ulice a číslo popisné </label>
-        <div class="invalid-feedback <?php // $model->isError('lastName') ? 'invalid-feedback' : '' ?>">
-            <?php //$model->getFirstError('lastName') ?>
-        </div>
     </div>
 
     <div class="col-md-6 form-floating">
         <input type="text" name="user_city" placeholder="Město" value="<?= (isset($user_city)) ? $user_city : null ?>" class="form-control form-control-lg" />
         <label class="form-label">Město</label>
-        <div class="invalid-feedback <?php // $model->isError('lastName') ? 'invalid-feedback' : '' ?>">
-            <?php //$model->getFirstError('lastName') ?>
-        </div>
     </div>
 
     <div class="col-md-6 form-floating">
         <input type="text" name="user_psc" id="floatingInput" placeholder="PSČ" value="<?= (isset($user_psc)) ? $user_psc : null ?>" class="form-control form-control-lg" />
         <label class="form-label">PSČ</label>
-        <div class="invalid-feedback <?php // $model->isError('lastName') ? 'invalid-feedback' : '' ?>">
-            <?php //$model->getFirstError('lastName') ?>
-        </div>
     </div>
 
     <div class="col-md-6 form-floating">
@@ -90,5 +72,3 @@
         <button type="submit" class="btn btn-primary">Uložit</button>
     </div>
 </form>
-
-<?php bdump($data);?>

@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-5 border-bottom">
+    <h1 class="h2"><?= $title ?></h1>
+</div>
+
+
+<form class=" row g-2" method="post">
+
+        <div class="col mb-3 form-floating">
+            <input type="text" readonly name="product_name" class="form-control-plaintext" id="floatingInput" class="pb-05 form-control form-control" value="<?= $product_name ?>">
+            <label class="form-label">Název pojištění</label>
+        </div>
+
+    <div class="col-md-3 input-group mb-3 form-floating">
+        <input type="number" name="insurance_sum" id="floatingInput" placeholder="Částka" value="<?= $insurance_sum ?>" class="form-control form-control-lg" required/>
+        <label class="form-label">Částka</label>
+        <span class="input-group-text" id="basic-addon2">Kč</span>
+    </div>
+
+
+    <div class="col-md-6 mb-3 form-floating">
+        <input type="date" name="insurance_start_date" id="floatingInput" placeholder="Platné od" value="<?= $insurance_start_date ?>" class="pb-05 form-control form-control" required/>
+        <label class="form-label">Platné od</label>
+    </div>
+    <div class="col-md-6 form-floating">
+        <input type="date" name="insurance_end_date" id="floatingInput" placeholder="Platné do" value="<?= $insurance_end_date ?>" class="pb-05 form-control form-control" required />
+        <label class="form-label">Platné do</label>
+    </div>
+
+    <div class="d-flex justify-content-center col-12 pt-4">
+        <button type="submit" class="btn btn-primary">Uložit</button>
+    </div>
+</form>

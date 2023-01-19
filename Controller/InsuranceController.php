@@ -17,9 +17,27 @@ use App\Model\InsuredModel;
 
 class InsuranceController extends Controller
 {
+    /**
+     * Výpis pojištění
+     * @param Request $request
+     * @return array|string|string[]|void
+     */
     public function insurance(Request $request)
     {
-        #TODO - detail pojištění
+        $head = [
+            'title' => 'Detail pojištění'
+        ];
+        $insuredModel = new InsuranceModel();
+        $data = $insuredModel->getInsurance($request->getRouteParam('id'));
+
+        bdump($data);
+
+
+        if(Application::isAdmin() OR $request->getUserId() == $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']) {
+            return self::render(__FUNCTION__, $head, $data);
+        } else {
+            echo 'Nejsi oprávněný';
+        }
     }
 
     /**
@@ -36,10 +54,10 @@ class InsuranceController extends Controller
         ];
 
         if(Application::isAdmin()){
-            $data = $insuredModel->getAllInsurance();
+            $data = $insuredModel->getAllInsurances();
             return self::render(__FUNCTION__, $head, $data);
         }
-        $data = $insuredModel->getUserInsurance($request->getUserId());
+        $data = $insuredModel->getUserInsurances($request->getUserId());
 
         return self::render(__FUNCTION__, $head, $data);
     }
@@ -83,7 +101,35 @@ class InsuranceController extends Controller
 
     public function editInsurance(Request $request)
     {
-        #TODO - editace pojištšní
+        $head = [
+          'title' => 'Editace pojištění'
+        ];
+
+        $insuredModel = new InsuranceModel();
+
+        if(Application::isAdmin() OR $request->getUserId() == $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']) {
+            if ($request->isPost()) {
+                try {
+                    $formData = $request->getBody();
+                    $insuredModel->updateInsurance($request->getRouteParam('id'), $formData);
+                    Application::$app->response->redirect('/insurance/'.$request->getRouteParam('id'));
+
+
+                } catch (\Exception $e){
+                    Application::$app->session->setFlash('warning', $e->getMessage());
+                    return self::render(__FUNCTION__, $head, $formData);
+
+                }
+            } else {
+                $data = $insuredModel->getInsurance($request->getRouteParam('id'));
+                return self::render(__FUNCTION__, $head, $data);
+            }
+        } else {
+            Application::$app->session->setFlash('warning', 'Pro editaci tohoto pojistění nemáte dostatečná oprávnění.');
+            Application::$app->response->redirect('/insurances');
+        }
+
+
     }
 
     /**

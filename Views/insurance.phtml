@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-5 border-bottom">
+    <h1 class="h2">Detail pojištění</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a class="btn btn-warning" href="/insurance/<?= $insurance_id ?>/edit" role="button">Změna údajů</a>
+        </div>
+    </div>
+</div>
+<p>Jméno: <?= $user_firstname . " " .  $user_lastname ?></p>
+<p>Název produktu: <?= $product_name ?></p>
+<p>Částka: <?= $insurance_sum ?></p>
+
+<p>Datum narození: <?=  \App\Core\Helper::dateIsSet(\App\Core\Helper::date(($insurance_start_date)))?></p>
+<p>Datum narození: <?=  \App\Core\Helper::dateIsSet(\App\Core\Helper::date(($insurance_end_date)))?></p>
