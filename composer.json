@@ -1,9 +1,8 @@
 {
-    "name": " ONyklicek/Pojistovaci-portal",
+    "name": "ONyklicek/Pojistovaci-portal",
     "authors": [
         {
             "name": "Ondrej Nyklicek",
-            "email": "ondrejnyklicek@gmail.com",
             "role": "Developer"
         }
     ],
