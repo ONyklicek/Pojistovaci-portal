@@ -54,7 +54,6 @@ class AuthController extends Controller
      */
     public function logout(): void
     {
-
         Application::$app->session->remove('user');
         Application::$app->session->setFlash('success', 'Byl jste úspěšně odhlášen.');
         Application::$app->response->redirect('/');
@@ -70,19 +69,17 @@ class AuthController extends Controller
         $head = [
             'title' => 'Registrace'
         ];
-        try{
-            $registerUser = new UserModel();
+        $registerUser = new UserModel();
+        $formData = $request->getBody();
+        if($request->isPost()) {
+            try {
+                $registerUser->register($formData);
 
-             if($request->isPost()){
-                 $formData = $request->getBody();
-
-                 $registerUser->register($formData);
-
-                 Application::$app->session->setFlash('success', 'Byl jste úspěšně zaregistrován.');
-                 Application::$app->response->redirect("/login");
-             }
-        } catch (\Exception $e) {
-            Application::$app->session->setFlash('warning', $e->getMessage());
+                Application::$app->session->setFlash('success', 'Byl jste úspěšně zaregistrován.');
+                Application::$app->response->redirect("/login");
+            } catch (\Exception $e) {
+                Application::$app->session->setFlash('warning', $e->getMessage());
+            }
         }
         return $this->render(__FUNCTION__, $head,  isset($formData)? $formData : []);
     }

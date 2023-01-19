@@ -11,7 +11,6 @@ namespace App\Core\Messages;
 
 enum eUserPerm: string
 {
-    case PERM_ADMIN = 'Administrátor';
-    case RULE_EMAIL = 'Emailová adresa není platná';
+    case INVALID_EMAIL = 'Emailová adresa není platná';
 }
 

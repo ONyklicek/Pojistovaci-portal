@@ -33,7 +33,7 @@ class ProductModel extends DbModel
         return self::selectOne("SELECT * 
                                     FROM `products` 
                                     WHERE `product_id` = ? "
-            , array($id));
+            , parameters: array($id));
     }
 
     /**
@@ -86,7 +86,7 @@ class ProductModel extends DbModel
     {
         try {
             self::query('DELETE FROM products WHERE product_id = ? ', array($id));
-        } catch (\PDOException) {
+        } catch (\PDOException $error) {
             throw new \Exception('Odstranění pojistění se nezdařilo');
         }
     }

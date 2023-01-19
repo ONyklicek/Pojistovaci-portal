@@ -37,7 +37,6 @@ class ProductController extends Controller
      */
     public function editProduct(Request $request)
     {
-
         $requestId = $request->getRouteParam('id');
 
         if($request->isGet()) {

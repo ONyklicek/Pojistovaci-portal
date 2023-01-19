@@ -55,50 +55,37 @@ class UserController extends Controller
         return self::render(__FUNCTION__, $head,  $data);
     }
 
+    /**
+     * Editace uživatele
+     * @param Request $request
+     * @return array|string|string[]|void
+     */
     public function editUser(Request $request)
     {
-        $requestId = $request->getRouteParam('id');
+
+        $head = [
+            'title' => 'Editace uživatele',
+        ];
+
+        $userModel = new UserModel();
+        $formData = $request->getBody();
 
         if((Application::isAdmin() OR ('user' === 'user'))) {
-            if ($request->isGet()) {
-                if (isset($requestId)) {
-                    $head = [
-                        'title' => 'Editace uživatele',
-                    ];
-
-                    $userModel = new UserModel();
-                    $data = $userModel->getUser($requestId);
-
-                    return self::render(__FUNCTION__, $head, $data);
-                } else {
-                    Application::$app->response->redirect("/users");
-                }
-            } elseif ($request->isPost()) {
+            if ($request->isPost()) {
                 try {
-                    $userModel = new UserModel();
-                    $formData = $request->getBody();
+                    $userModel->updateUser($request->getRouteParam('id'), $formData);
 
-                    if (isset($requestId)) {
-                        $head = [
-                            'title' => 'Editace uživatele',
-                        ];
-                        $userModel->updateUser($requestId, $formData);
-                        Application::$app->session->setFlash('success', 'Uživatel byl úspěšně aktualizován');
-                        Application::$app->response->redirect("/users");
-                    } else {
-                        $head = [
-                            'title' => 'Přidání nového uživatele',
-                        ];
-                        $newId = $userModel->addUser($formData);
-                        Application::$app->session->setFlash('success', 'Uživatel byl úspěšně pridán');
-                        Application::$app->response->redirect("/users");
-                    }
-
+                    Application::$app->session->setFlash('success', 'Uživatel byl úspěšně aktualizován');
+                    Application::$app->response->redirect("/users");
                 } catch (\Exception $e) {
                     Application::$app->session->setFlash('warning', $e->getMessage());
                     return self::render(__FUNCTION__, $head, $formData);
                 }
             }
+
+            $data = $userModel->getUser($request->getRouteParam('id'));
+
+            return self::render(__FUNCTION__, $head, $data);
         }
     }
 
@@ -109,32 +96,26 @@ class UserController extends Controller
      */
     public function addUser(Request $request)
     {
+        $head = [
+            'title' => 'Přidání nového uživatele',
+        ];
+
+        $userModel = new UserModel();
+        $formData = $request->getBody();
+
         if(Application::isAdmin()) {
             if ($request->isPost()) {
                 try {
-                    $userModel = new UserModel();
-                    $formData = $request->getBody();
-
-                    $head = [
-                        'title' => 'Přidání nového uživatele',
-                    ];
-
                     $userModel->addUser($formData);
                     Application::$app->session->setFlash('success', 'Uživatel byl úspěšně přidán');
                     Application::$app->response->redirect("/users");
-
-
                 } catch (\Exception $e) {
                     Application::$app->session->setFlash('warning', $e->getMessage());
                     return self::render(__FUNCTION__, $head, $formData);
                 }
-            } else {
-                $head = [
-                    'title' => 'Přidání nového uživatele',
-                ];
-
-                return self::render(__FUNCTION__, $head, []);
             }
+            return self::render(__FUNCTION__, $head, []);
+
         } else {
             Application::$app->session->setFlash('warning', 'Nemáte dostatečné oprávnění pro přidání uživatele');
             Application::$app->response->redirect('/user/'.$request->getUserId());
