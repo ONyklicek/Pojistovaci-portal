@@ -7,7 +7,8 @@ Projekt je inspirován frameworky jako Nette, nebo Laravel.
 
 ---
 **TODO**
-- [ ] PDOexceptionHandler
-- [ ] Validace
-- [ ] FormFactory 
+- [ ] Add: Change password
+- [ ] Add:PDOexceptionHandler
+- [ ] Add: Validace
+- [ ] Add: FormFactory 
 
