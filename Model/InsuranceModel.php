@@ -28,7 +28,7 @@ class InsuranceModel extends DbModel
      * @param int $id
      * @return array
      */
-    public function getInsurance(mixed $id): array
+    public function getInsurance(int $id): array
     {
         return self::selectOne("SELECT u.user_lastname, u.user_firstname, p.product_name, insurance_start_date, insurance_end_date, insurance_sum, insurance_id
                                     FROM insurances 
