@@ -30,9 +30,6 @@ class InsuranceController extends Controller
         $insuredModel = new InsuranceModel();
         $data = $insuredModel->getInsurance($request->getRouteParam('id'));
 
-        bdump($data);
-
-
         if(Application::isAdmin() OR $request->getUserId() == $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']) {
             return self::render(__FUNCTION__, $head, $data);
         } else {
@@ -43,9 +40,8 @@ class InsuranceController extends Controller
     /**
      * Výpis všech pojištění
      * @param Request $request
-     * @return array|string
      */
-    public function insurances(Request $request): string
+    public function insurances(Request $request)
     {
         $insuredModel = new InsuranceModel();
 
@@ -65,7 +61,6 @@ class InsuranceController extends Controller
     /**
      * Přidání pojištění
      * @param Request $request
-     * @return array|string|string[]
      */
     public function addInsurance(Request $request)
     {
