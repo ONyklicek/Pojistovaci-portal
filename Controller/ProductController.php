@@ -92,17 +92,21 @@ class ProductController extends Controller
      */
     public function deleteProduct(Request $request): void
     {
-        $requestId = $request->getRouteParam('id');
-        $productModel = new ProductModel();
+        if(Application::$app->isAdmin()){
+            $requestId = $request->getRouteParam('id');
+            $productModel = new ProductModel();
 
-        try {
-            $productModel->deleteProduct($requestId);
-            Application::$app->session->setFlash('success', 'Pojištění bylo úspěšně odstraněno.');
-            Application::$app->response->redirect('/products');
-        } catch (\Exception $e){
-            Application::$app->session->setFlash('warning', $e->getMessage());
-            Application::$app->response->redirect('/products');
-        }
+            try {
+                $productModel->deleteProduct($requestId);
+                Application::$app->session->setFlash('success', 'Pojištění bylo úspěšně odstraněno.');
+                Application::$app->response->redirect('/products');
+            } catch (\Exception $e){
+                Application::$app->session->setFlash('warning', $e->getMessage());
+                Application::$app->response->redirect('/products');
+            }
+        } else {
+            Application::$app->response->redirect('/404');
+        }  
     }
 
 }
