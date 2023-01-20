@@ -79,8 +79,9 @@ class AuthController extends Controller
                 Application::$app->response->redirect("/login");
             } catch (\Exception $e) {
                 Application::$app->session->setFlash('warning', $e->getMessage());
+                return $this->render(__FUNCTION__, $head,  $formData);
             }
         }
-        return $this->render(__FUNCTION__, $head,  isset($formData)? $formData : []);
+        return $this->render(__FUNCTION__, $head);
     }
 }
