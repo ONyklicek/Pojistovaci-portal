@@ -11,24 +11,19 @@ namespace App\Controller;
 
 use App\Core\Application;
 use App\Core\Controller;
-use App\Core\Request;
-use App\Model\UserModel;
+
 class SiteController extends Controller
 {
-
-
     /**
-     * @return array|string|string[]|void
+     * Úvodní stránka
+     * @return string
      */
-    public function home()
+    public function home(): string
     {
         if(Application::$app->session->get('user')){
             return self::render(__FUNCTION__);
-        } else {
-            return self::render('welcome');
         }
+
+        return self::render('welcome');
     }
-
-
-
 }

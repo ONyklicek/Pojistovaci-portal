@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Core\Application;
 use App\Core\Controller;
+use App\Core\Messages\eMsgUser;
 use App\Core\Request;
 use App\Model\UserModel;
 
@@ -19,10 +20,10 @@ class AuthController extends Controller
     /**
      * Přihlášení uživatele
      * @param Request $request
-     * @return array|string|string[]
+     * @return string
      * @throws \Exception
      */
-    public function login(Request $request): array|string
+    public function login(Request $request): string
     {
         $head = [
             'title' => 'Přihlášení'
@@ -37,15 +38,14 @@ class AuthController extends Controller
                     $formData['login'],
                     $formData['password'],
                 );
-                Application::$app->session->setFlash('success', 'Byl jste úspěšně přihlášen.');
+                Application::$app->session->setFlash('success', eMsgUser::MSG_LOGIN->value);
                 Application::$app->response->redirect("/");
-
             } catch (\Exception $e) {
                 Application::$app->session->setFlash('warning', $e->getMessage());
                 return self::render(__FUNCTION__, $head, $formData);
             }
         }
-        return self::render(__FUNCTION__, $head);
+        return self::render(__FUNCTION__, $head, []);
     }
 
     /**
@@ -55,16 +55,16 @@ class AuthController extends Controller
     public function logout(): void
     {
         Application::$app->session->remove('user');
-        Application::$app->session->setFlash('success', 'Byl jste úspěšně odhlášen.');
+        Application::$app->session->setFlash('success', eMsgUser::MSG_LOGOUT->value);
         Application::$app->response->redirect('/');
     }
 
     /**
      * Registrace uživatele
      * @param Request $request
-     * @return array|string|string[]
+     * @return string
      */
-    public function register(Request $request): array|string
+    public function register(Request $request): string
     {
         $head = [
             'title' => 'Registrace'
@@ -74,14 +74,14 @@ class AuthController extends Controller
             $formData = $request->getBody();
             try {
                 $registerUser->register($formData);
-                
-                Application::$app->session->setFlash('success', 'Byl jste úspěšně zaregistrován.');
+
+                Application::$app->session->setFlash('success', eMsgUser::MSG_REGISTER->value);
                 Application::$app->response->redirect("/login");
             } catch (\Exception $e) {
                 Application::$app->session->setFlash('warning', $e->getMessage());
-                return $this->render(__FUNCTION__, $head,  $formData);
+                return $this->render(__FUNCTION__, $head, $formData);
             }
         }
-        return $this->render(__FUNCTION__, $head);
+        return $this->render(__FUNCTION__, $head,  []);
     }
 }

@@ -14,8 +14,11 @@ use App\Core\Bootstrap;
 class Database
 {
     public static $db;
+
+
     /**
-     * @param \PDO $PDO
+     * Připojení k databázi
+     * @return void
      */
     public static function connect(): void
     {

@@ -18,7 +18,7 @@ class Helper
      * @param  string $date vstupní datum
      * @return string
      */
-    public static function date(string $date): ?string
+    public static function date(string $date): string
     {
         if (!$date) {
             return '';
@@ -33,20 +33,20 @@ class Helper
      * @param  string $date vstuní datum
      * @return string
      */
-    public static function longDate(string $timestamp): ?string
+    public static function longDate(string $date): string
     {
-        if (!$timestamp) {
+        if (!$date) {
             return '';
         }
 
         $czMonths = ['ledna', 'února', 'března', 'dubna', 'května', 'června', 'července', 'srpna', 'září', 'října', 'listopadu', 'prosince'];
 
-        $monthNumber = intval(date('n', strtotime($timestamp)));
+        $monthNumber = intval(date('n', strtotime($date)));
 
         return sprintf('%d.%s. %d',
-            date('j', strtotime($timestamp)),
+            date('j', strtotime($date)),
             $czMonths[$monthNumber],
-            date('Y', strtotime($timestamp)));
+            date('Y', strtotime($date)));
     }
 
     /**

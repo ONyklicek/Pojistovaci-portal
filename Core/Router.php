@@ -65,7 +65,7 @@ class Router implements StatusCodeInterface, RequestMethodInterface
         $callback = self::getRoute($method, $url);
 
         if (!$callback){
-            $callback = self::getCallbeck();
+            $callback = self::getCallback();
 
             if($callback === false) {
                 Application::$app->response->statusCode(self::STATUS_NOT_FOUND);
@@ -80,7 +80,6 @@ class Router implements StatusCodeInterface, RequestMethodInterface
 
         //Vrácení instance volané třídy
         if (is_array($callback)) {
-            bdump($callback);
             Application::$app->setController(new $callback[0]);  //vytvoření instance, je-li volána třída
             Application::$app->controller->setAction($callback[1]);
             $callback[0] = Application::$app->getController();
@@ -95,7 +94,7 @@ class Router implements StatusCodeInterface, RequestMethodInterface
      *
      * @return false|mixed
      */
-    public function getCallbeck(): mixed
+    public function getCallback(): mixed
     {
         $method = self::getRequest()->getMethod();
         $url = self::getRequest()->getUrl();
@@ -119,7 +118,12 @@ class Router implements StatusCodeInterface, RequestMethodInterface
         return false;
 
     }
-    private function getRegex($pattern)
+
+    /**
+     * @param $pattern
+     * @return string|false
+     */
+    private function getRegex($pattern): string|false
     {
         if (preg_match('/[^-:\/_{}()a-zA-Z\d]/', $pattern))
             return false; // Invalid pattern
@@ -155,13 +159,15 @@ class Router implements StatusCodeInterface, RequestMethodInterface
      * @param array $data
      * @return array|string|string[]
      */
-    public function renderView(string $view, array $head = [], ?array $data = []) : array|string
+    public function renderView(string $view, array $head = [], array $data = []) : array|string
     {
         return Application::$app->view->renderView($view, $head, $data);
     }
 
     /**
-     * @return array
+     * @param string $method
+     * @param string $url
+     * @return array|false
      */
     public function getRoute(string $method, string $url): array|false
     {
@@ -173,24 +179,16 @@ class Router implements StatusCodeInterface, RequestMethodInterface
         return $this->routeMap[$method];
     }
 
+
     /**
+     * @param string $method
+     * @param string $url
      * @param array $routeMap
+     * @return void
      */
     private function setRouteMap(string $method, string $url, array $routeMap): void
     {
         $this->routeMap[$method][$url] = $routeMap;
-    }
-
-    /**
-     * Získání obsahu a zabezpečení šablony
-     *
-     * @param string $view
-     * @param array|string $data
-     * @return false|string|null
-     */
-    protected function renderViewOnly(string $view, array|string $data): String|False|Null
-    {
-        return Application::$app->view->renderViewOnly($view, $data);
     }
 
     /**

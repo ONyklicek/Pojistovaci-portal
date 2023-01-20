@@ -153,11 +153,16 @@ class Application
     }
 
 
-
-    public static function isAdmin()
+    /**
+     * Ověření oprávnění - Admin
+     * @return bool
+     */
+    public static function isAdmin(): bool
     {
         if((isset($_SESSION['user'])) && ($_SESSION['user']['user_type'] === 0)){
             return true;
+        } else {
+            return false;
         }
     }
 

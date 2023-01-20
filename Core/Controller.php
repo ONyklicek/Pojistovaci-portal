@@ -65,21 +65,4 @@ class Controller
     {
         $this->action = $action;
     }
-
-    /**
-     * @param $data
-     * @return mixed|void
-     */
-    public function loadData($data)
-    {
-        foreach ($data as $key => $value) {
-            if (property_exists($this, $key)) {
-                return $this->{$key} = $value;
-            }
-        }
-    }
-
-
-
-
 }

@@ -116,7 +116,7 @@ class InsuranceModel extends DbModel
 
     /**
      * Odstranění pojištění
-     * @param ind $id
+     * @param int $id
      * @return void
      */
     public function deleteInsurance(int $id): void

@@ -18,9 +18,9 @@ class ProductController extends Controller
 {
     /**
      * Výpis všech produktů
-     * @return array|string|string[]
+     * @return string
      */
-    public function products(): array|string
+    public function products(): string
     {
         $head = [
             'title' => "Pojistky"
@@ -31,33 +31,17 @@ class ProductController extends Controller
         return self::render(__FUNCTION__, $head,  $data);
     }
 
+
     /**
      * Editace produktu
      * @param Request $request
+     * @return string
      */
-    public function editProduct(Request $request)
+    public function editProduct(Request $request): string
     {
         $requestId = $request->getRouteParam('id');
 
-        if($request->isGet()) {
-            if (isset($requestId)) {
-                $head = [
-                    'title' => 'Editace produktu',
-                ];
-
-                $productModel = new ProductModel();
-                $data = $productModel->getProduct($requestId);
-
-                return self::render(__FUNCTION__, $head, $data);
-            } else {
-                $head = [
-                    'title' => 'Přidání nového produktu',
-                ];
-
-                return self::render(__FUNCTION__, $head, []);
-            }
-        } elseif ($request->isPost()){
-
+        if ($request->isPost()){
             $productModel = new ProductModel();
             $formData = $request->getBody();
 
@@ -76,12 +60,27 @@ class ProductController extends Controller
                     Application::$app->session->setFlash('success', 'Pojistění bylo úspěšně přidáno');
                 }
                 Application::$app->response->redirect("/products");
-
             } catch (\Exception $e){
                 Application::$app->session->setFlash('warning', 'Pojištění s tímto názvem existuje');
                 return self::render(__FUNCTION__, $head, $formData);
             }
         }
+
+        if (isset($requestId)) {
+            $head = [
+                'title' => 'Editace produktu',
+            ];
+
+            $productModel = new ProductModel();
+            $data = $productModel->getProduct($requestId);
+
+            return self::render(__FUNCTION__, $head, $data);
+        }
+
+        $head = [
+            'title' => 'Přidání nového produktu',
+        ];
+        return self::render(__FUNCTION__, $head, []);
     }
 
     /**
