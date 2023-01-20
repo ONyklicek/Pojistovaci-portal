@@ -45,7 +45,7 @@ class InsuranceController extends Controller
      * @param Request $request
      * @return array|string
      */
-    public function insurances(Request $request): array|string
+    public function insurances(Request $request): string
     {
         $insuredModel = new InsuranceModel();
 
@@ -67,7 +67,7 @@ class InsuranceController extends Controller
      * @param Request $request
      * @return array|string|string[]
      */
-    public function addInsurance(Request $request): array|string
+    public function addInsurance(Request $request)
     {
         $head = [
             'title' => 'Sjednání nového pojištění'
@@ -99,7 +99,7 @@ class InsuranceController extends Controller
         return self::render(__FUNCTION__, $head, $productData);
     }
 
-    public function editInsurance(Request $request)
+    public function editInsurance(Request $request): mixed
     {
         $head = [
           'title' => 'Editace pojištění'
