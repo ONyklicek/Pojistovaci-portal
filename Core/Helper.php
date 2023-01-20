@@ -33,7 +33,7 @@ class Helper
      * @param  string $date vstuní datum
      * @return string
      */
-    public static function longDate(string $timestamp): ?string
+    public static function longDate(string $timestamp): string
     {
         if (!$timestamp) {
             return '';

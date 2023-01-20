@@ -88,10 +88,9 @@ class UserController extends Controller
 
         if(Application::isAdmin() OR $request->getRouteParam('id') == $request->getUserId()) {
             if ($request->isPost()) {
+                $formData = $request->getBody();
                 try {
-                    $formData = $request->getBody();
                     $userModel->updateUser($request->getRouteParam('id'), $formData);
-
 
                     if(Application::isAdmin()) {
                         Application::$app->session->setFlash('success', 'Uživatel byl úspěšně aktualizován');
@@ -106,7 +105,6 @@ class UserController extends Controller
                     return self::render(__FUNCTION__, $head, $formData);
                 }
             }
-
             $data = $userModel->getUser($request->getRouteParam('id'));
 
             return self::render(__FUNCTION__, $head, $data);

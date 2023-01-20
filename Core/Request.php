@@ -61,25 +61,27 @@ class Request implements RequestMethodInterface
 
     /**
      * Získání id uživatele
-     * @return mixed
+     * @return int|null
      */
     public function getUserId(): int|null
     {
         return $_SESSION['user']['user_id'];
     }
 
+
     /**
      * Získání těla
-     *
      * @return array
      */
-    public function getBody()
+    public function getBody(): array
     {
         foreach ($_POST as $key => $value) {
             $data[$key] = ($value);
         }
 
+        if (empty($data)) return [];
         return $data;
+
     }
 
     /**
@@ -103,7 +105,7 @@ class Request implements RequestMethodInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getRouteParams(): array
     {

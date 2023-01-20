@@ -11,12 +11,22 @@ namespace App\Core;
 
 class Response
 {
-    public function statusCode(int $code)
+    /**
+     * Nastavení HTTP status kodu
+     * @param int $code
+     * @return void
+     */
+    public function statusCode(int $code): void
     {
         http_response_code($code);
     }
 
-    public function redirect($url)
+    /**
+     * Přesměrování
+     * @param string $url adresa požadované stránky
+     * @return void
+     */
+    public function redirect(string $url): void
     {
         header("Location: $url");
     }

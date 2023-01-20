@@ -14,8 +14,6 @@ use App\Core\Controller;
 
 class SiteController extends Controller
 {
-
-
     /**
      * Úvodní stránka
      * @return string|

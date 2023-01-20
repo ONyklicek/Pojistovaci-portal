@@ -90,11 +90,7 @@ class UserModel extends DbModel
 
     /**
      * Registrace nového uživatele
-     * @param string $email
-     * @param string $firstname
-     * @param string $lastname
-     * @param string $password
-     * @param string $passwordConfirm
+     * @param array $data
      * @return void
      * @throws \Exception
      */
