@@ -71,17 +71,16 @@ class AuthController extends Controller
         ];
         $registerUser = new UserModel();
         if($request->isPost()) {
-            $formData = $request->getBody();
             try {
+                $formData = $request->getBody();
                 $registerUser->register($formData);
                 
-
                 Application::$app->session->setFlash('success', 'Byl jste úspěšně zaregistrován.');
                 Application::$app->response->redirect("/login");
             } catch (\Exception $e) {
                 Application::$app->session->setFlash('warning', $e->getMessage());
+                return $this->render(__FUNCTION__, $head,  $formData);
             }
-            return $this->render(__FUNCTION__, $head,  $formData);
         }
         return $this->render(__FUNCTION__, $head);
     }
