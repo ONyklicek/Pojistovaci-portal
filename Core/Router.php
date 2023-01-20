@@ -121,9 +121,9 @@ class Router implements StatusCodeInterface, RequestMethodInterface
 
     /**
      * @param $pattern
-     * @return string
+     * @return string|false
      */
-    private function getRegex($pattern): string
+    private function getRegex($pattern): string|false
     {
         if (preg_match('/[^-:\/_{}()a-zA-Z\d]/', $pattern))
             return false; // Invalid pattern
@@ -165,7 +165,9 @@ class Router implements StatusCodeInterface, RequestMethodInterface
     }
 
     /**
-     * @return array|fasle
+     * @param string $method
+     * @param string $url
+     * @return array|false
      */
     public function getRoute(string $method, string $url): array|false
     {

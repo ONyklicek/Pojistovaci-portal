@@ -81,12 +81,12 @@ abstract class DbModel extends Model
      * @param array $parametry
      * @return bool
      */
-    public static function update(string $table, array $values, string $conditional, array $parametry) : bool
+    public static function update(string $table, array $values, string $conditional, array $parameter) : bool
     {
-        return self::query("UPDATE `$table` SET `".
+        return self::query("UPDATE `$table` SET ".
             implode('` = ?, `', array_keys($values)).
-            "` = ? " . $conditional,
-            array_merge(array_values($values), $parametry));
+            " = ? " . $conditional,
+            parameters: array_merge(array_values($values), $parameter));
     }
 
     /**

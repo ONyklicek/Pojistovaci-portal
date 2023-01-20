@@ -16,7 +16,7 @@ class SiteController extends Controller
 {
     /**
      * Úvodní stránka
-     * @return string|
+     * @return string
      */
     public function home(): string
     {
