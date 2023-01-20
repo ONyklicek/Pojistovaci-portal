@@ -2,6 +2,7 @@
 
 [![PHP Composer](https://github.com/ONyklicek/Pojistovaci-portal/actions/workflows/php.yml/badge.svg)](https://github.com/ONyklicek/Pojistovaci-portal/actions/workflows/php.yml)
 [![PHPStan](https://github.com/ONyklicek/Pojistovaci-portal/actions/workflows/ci.yml/badge.svg)](https://github.com/ONyklicek/Pojistovaci-portal/actions/workflows/ci.yml)
+![PHP](https://img.shields.io/badge/php-%5E8.1-green)
 
 
 
