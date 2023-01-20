@@ -95,7 +95,7 @@ class Router implements StatusCodeInterface, RequestMethodInterface
      *
      * @return false|mixed
      */
-    public function getCallbeck(): mixed
+    public function getCallbeck()
     {
         $method = self::getRequest()->getMethod();
         $url = self::getRequest()->getUrl();
