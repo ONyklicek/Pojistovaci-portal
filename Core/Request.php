@@ -95,9 +95,9 @@ class Request implements RequestMethodInterface
     /**
      * @param $param
      * @param $default
-     * @return mixed|null
+     * @return string|int|null
      */
-    public function getRouteParam($param, $default = null): mixed
+    public function getRouteParam($param, $default = null): string|int|null
     {
         return $this->routeParams[$param] ?? $default;
     }
