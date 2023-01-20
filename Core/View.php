@@ -59,8 +59,8 @@ class View
     {
         ob_start();
 
-        //Secure View
-        extract(self::secureView($head));
+        foreach (self::secureView($head) as $key => $value)
+            $$key = $value;
         if(isset($data)) {
             foreach (self::secureView($data) as $key => $value)
                 $$key = $value;
