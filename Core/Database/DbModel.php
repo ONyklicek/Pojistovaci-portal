@@ -90,6 +90,7 @@ abstract class DbModel extends Model
     }
 
     /**
+     * Id posledního vložení do DB
      * @return int
      */
     public static function latestId() : int
