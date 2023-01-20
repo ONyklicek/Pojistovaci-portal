@@ -18,10 +18,12 @@ class View
             $layoutName = Application::$app->controller->getLayout();
         }
         if(isset($_SESSION['user'])){
-            extract(self::secureView($_SESSION['user']), EXTR_PREFIX_SAME, "__");
+            foreach (self::secureView($_SESSION['user']) as $key => $value)
+                $$key = $value;
         }
         //Secure View
-        extract(self::secureView($head));
+        foreach (self::secureView($head) as $key => $value)
+            $$key = $value;
 
         $viewContent = self::renderViewOnly($view, $head, $data);
         ob_start();
@@ -65,9 +67,6 @@ class View
             foreach (self::secureView($data) as $key => $value)
                 $$key = $value;
         }
-            //extract(self::secureView($data));
-            extract($data, EXTR_PREFIX_ALL, "");
-
 
         include_once Application::getRootDir() . "/Views/$view.phtml";
         return ob_get_clean();
