@@ -11,7 +11,7 @@ namespace App\Core;
 
 class View
 {
-    public function renderView(string $view, array $head, ?array $data)
+    public function renderView(string $view, array $head, ?array $data): array|string
     {
         $layoutName = Application::$app->layout;
         if (Application::$app->controller) {
@@ -55,7 +55,7 @@ class View
         }
     }
 
-    public function renderViewOnly(string $view, array $head, ?array $data)
+    public function renderViewOnly(string $view, array $head, ?array $data): array|string
     {
         ob_start();
 

@@ -68,6 +68,7 @@ class InsuranceController extends Controller
      * @return string
      */
     public function addInsurance(Request $request): string
+
     {
         $head = [
             'title' => 'Sjednání nového pojištění'
@@ -105,6 +106,7 @@ class InsuranceController extends Controller
      * @return string
      */
     public function editInsurance(Request $request): string
+
     {
         $head = [
           'title' => 'Editace pojištění'

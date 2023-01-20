@@ -69,7 +69,7 @@ class InsuranceModel extends DbModel
      * @param int $id ID pojištění
      * @return array
      */
-    public function getUserIdInsurance(int $id): array|int
+    public function getUserIdInsurance(int $id): array
     {
         return self::selectOne("SELECT user_id 
                                     FROM insurances 
