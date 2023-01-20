@@ -62,13 +62,19 @@ class View
         //Secure View
         extract(self::secureView($head));
         if(isset($data)) {
-            extract($this->secureView($data));
-            extract($data, EXTR_PREFIX_ALL, "");
+            foreach (self::secureView($data) as $key => $value)
+                $$key = $value;
         }
+            //extract(self::secureView($data));
+            extract($data, EXTR_PREFIX_ALL, "");
+
 
         include_once Application::getRootDir() . "/Views/$view.phtml";
         return ob_get_clean();
     }
+
+
+
 
 
 

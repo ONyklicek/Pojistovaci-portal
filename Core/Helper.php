@@ -18,7 +18,7 @@ class Helper
      * @param  string $date vstupní datum
      * @return string
      */
-    public static function date(string $date): ?string
+    public static function date(string $date): string
     {
         if (!$date) {
             return '';
