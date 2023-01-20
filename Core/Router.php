@@ -80,7 +80,6 @@ class Router implements StatusCodeInterface, RequestMethodInterface
 
         //Vrácení instance volané třídy
         if (is_array($callback)) {
-            bdump($callback);
             Application::$app->setController(new $callback[0]);  //vytvoření instance, je-li volána třída
             Application::$app->controller->setAction($callback[1]);
             $callback[0] = Application::$app->getController();

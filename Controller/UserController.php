@@ -86,7 +86,6 @@ class UserController extends Controller
 
         $userModel = new UserModel();
 
-
         if(Application::isAdmin() OR $request->getRouteParam('id') == $request->getUserId()) {
             if ($request->isPost()) {
                 try {

@@ -11,6 +11,7 @@ namespace App\Model;
 
 use App\Core\Application;
 use App\Core\Database\DbModel;
+use App\Core\Messages\eMsgUser;
 use http\Exception;
 
 class UserModel extends DbModel
@@ -66,11 +67,11 @@ class UserModel extends DbModel
     public function login(string $login, string $password): void
     {
         if(empty($login)) {
-            throw new \Exception('Zatejte email nebo telefoní číslo');
+            throw new \Exception(eMsgUser::ERR_INVALID_LOGIN->value);
         }
         bdump($password);
         if(empty($password)) {
-            throw new \Exception('Heslo nesmí být prázdné');
+            throw new \Exception(eMsgUser::ERR_PASS_EMPTY->value);
         }
 
         $user = self::selectOne('
@@ -79,10 +80,10 @@ class UserModel extends DbModel
 			WHERE user_email = ? OR user_telephone  = ?
 		', array($login, $login));
         if (!$user){
-            throw new \Exception('Neplatný email nebo telefoní číslo.');
+            throw new \Exception(eMsgUser::ERR_INVALID_LOGIN->value);
 
         } elseif (!password_verify($password, $user['user_password'])){
-            throw new \Exception('Neplatné heslo.');
+            throw new \Exception(eMsgUser::ERR_INVALID_PASS->value);
         }
         Application::$app->session->set(key: 'user' , value: $user);
     }
@@ -100,14 +101,14 @@ class UserModel extends DbModel
     public function addUser(array $data) : void
     {
         if (empty($data['user_password']) or empty($data['user_passwordConfirm']))
-            throw new \Exception('Heslo nesmí být prázdné.');
+            throw new \Exception(eMsgUser::ERR_PASS_EMPTY->value);
         if ($data['user_password'] != $data['user_passwordConfirm'])
-            throw new \Exception('Hesla nesouhlasí.');
+            throw new \Exception(eMsgUser::ERR_PASS_NOT_MATCH->value);
         if (!filter_var($data['user_email'], FILTER_VALIDATE_EMAIL)) {
-            throw new \Exception('Neplatný formát emailu.');
+            throw new \Exception(eMsgUser::ERR_INVALID_FORMAT_EMAIL->value);
         }
         if (!self::validPhoneNumber($data['user_telephone'])) {
-            throw new \Exception('Neplatný formát telefoního čísla.');
+            throw new \Exception(eMsgUser::ERR_INVALID_FORMAT_PHONE->value);
         }
 
         $user = array(
@@ -133,14 +134,14 @@ class UserModel extends DbModel
     public function register(array $data) : void
     {
         if (empty($data['user_password']) or empty($data['user_passwordConfirm']))
-            throw new \Exception('Heslo nesmí být prázdné.');
+            throw new \Exception(eMsgUser::ERR_PASS_EMPTY->value);
         if ($data['user_password'] != $data['user_passwordConfirm'])
-            throw new \Exception('Hesla nesouhlasí.');
+            throw new \Exception(eMsgUser::ERR_PASS_NOT_MATCH->value);
         if (!filter_var($data['user_email'], FILTER_VALIDATE_EMAIL)) {
-            throw new \Exception('Neplatný formát emailu.');
+            throw new \Exception(eMsgUser::ERR_INVALID_EMAIL->value);
         }
         if (!self::validPhoneNumber($data['user_telephone'])) {
-            throw new \Exception('Neplatný formát telefoního čísla.');
+            throw new \Exception(eMsgUser::ERR_INVALID_FORMAT_PHONE);
         }
 
         $user = array(
@@ -172,14 +173,14 @@ class UserModel extends DbModel
     {
         if(!empty($data['user_password'])) {
             if ($data['user_password'] != $data['user_passwordConfirm']) {
-                throw new \Exception('Hesla nesouhlasí.');
+                throw new \Exception(eMsgUser::ERR_PASS_EMPTY->value);
             }
             if (!filter_var($data['user_email'], FILTER_VALIDATE_EMAIL)) {
-                throw new \Exception('Neplatný formát emailu.');
+                throw new \Exception(eMsgUser::ERR_INVALID_FORMAT_EMAIL->value);
             }
         }
         if (!self::validPhoneNumber($data['user_telephone'])) {
-            throw new \Exception('Neplatný formát telefoního čísla.');
+            throw new \Exception(eMsgUser::ERR_INVALID_FORMAT_PHONE->value);
         }
 
         $dbKey = array('user_firstname', 'user_lastname', 'user_email', 'user_birthdate', 'user_telephone', 'user_city', 'user_address', 'user_psc', 'user_type');
