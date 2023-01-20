@@ -67,7 +67,7 @@ class UserController extends Controller
             'title' => "Pojištěnci"
         ];
         $policyholdersModel = new UserModel();
-        $data = $policyholdersModel->getUsersGroup("1");
+        $data = $policyholdersModel->getUsersGroup(1);
 
         return self::render(__FUNCTION__, $head,  $data);
     }

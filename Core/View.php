@@ -33,10 +33,10 @@ class View
 
     /**
      * Zabezpečení dat ve výstupu
-     * @param $data vstupní data
-     * @return array|mixed|string|null
+     * @param mixed $data  vstupní data
+     * @return mixed
      */
-    private function secureView($data)
+    private function secureView(mixed $data): mixed
     {
         if (!isset($data))
             return null;

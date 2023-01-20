@@ -25,11 +25,6 @@ class UserModel extends DbModel
         return self::selectAll("SELECT * FROM users ORDER BY `user_id`");
     }
 
-    public function getUserId(): array
-    {
-        return self::selectAll("SELECT user_id FROM users WHERE ");
-    }
-
     /**
      * Výpis skupiny uživatelů
      * @param int $id ID skupiny uživatelů
@@ -96,16 +91,7 @@ class UserModel extends DbModel
      */
     public function addUser(array $data) : void
     {
-        if (empty($data['user_password']) or empty($data['user_passwordConfirm']))
-            throw new \Exception(eMsgUser::ERR_PASS_EMPTY->value);
-        if ($data['user_password'] != $data['user_passwordConfirm'])
-            throw new \Exception(eMsgUser::ERR_PASS_NOT_MATCH->value);
-        if (!filter_var($data['user_email'], FILTER_VALIDATE_EMAIL)) {
-            throw new \Exception(eMsgUser::ERR_INVALID_FORMAT_EMAIL->value);
-        }
-        if (!self::validPhoneNumber($data['user_telephone'])) {
-            throw new \Exception(eMsgUser::ERR_INVALID_FORMAT_PHONE->value);
-        }
+        self::userFormValid($data);
 
         $user = array(
             'user_firstname' => $data['user_firstname'],
@@ -127,18 +113,16 @@ class UserModel extends DbModel
         }
     }
 
+    /**
+     * Registrace uživatele
+     * @param array $data
+     * @return void
+     * @throws \Exception
+     */
     public function register(array $data) : void
     {
-        if (empty($data['user_password']) or empty($data['user_passwordConfirm']))
-            throw new \Exception(eMsgUser::ERR_PASS_EMPTY->value);
-        if ($data['user_password'] != $data['user_passwordConfirm'])
-            throw new \Exception(eMsgUser::ERR_PASS_NOT_MATCH->value);
-        if (!filter_var($data['user_email'], FILTER_VALIDATE_EMAIL)) {
-            throw new \Exception(eMsgUser::ERR_INVALID_EMAIL->value);
-        }
-        if (!self::validPhoneNumber($data['user_telephone'])) {
-            throw new \Exception(eMsgUser::ERR_INVALID_FORMAT_PHONE);
-        }
+
+        self::userFormValid($data);
 
         $user = array(
             'user_firstname' => $data['user_firstname'],
@@ -164,6 +148,7 @@ class UserModel extends DbModel
      * @param int $id ID uživatele
      * @param array $data Data z formuláře
      * @return void
+     * @throws \Exception
      */
     public function updateUser(int $id, array $data): void
     {
@@ -225,6 +210,25 @@ class UserModel extends DbModel
             return $this;
         }
 
+    }
+
+    /**
+     * @param array $data
+     * @return void
+     * @throws \Exception
+     */
+    protected function userFormValid(array $data): void
+    {
+        if (empty($data['user_password']) or empty($data['user_passwordConfirm']))
+            throw new \Exception(eMsgUser::ERR_PASS_EMPTY->value);
+        if ($data['user_password'] != $data['user_passwordConfirm'])
+            throw new \Exception(eMsgUser::ERR_PASS_NOT_MATCH->value);
+        if (!filter_var($data['user_email'], FILTER_VALIDATE_EMAIL)) {
+            throw new \Exception(eMsgUser::ERR_INVALID_EMAIL->value);
+        }
+        if (!self::validPhoneNumber($data['user_telephone'])) {
+            throw new \Exception(eMsgUser::ERR_INVALID_FORMAT_PHONE->value);
+        }
     }
 
 
