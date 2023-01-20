@@ -70,8 +70,8 @@ class AuthController extends Controller
             'title' => 'Registrace'
         ];
         $registerUser = new UserModel();
-        $formData = $request->getBody();
         if($request->isPost()) {
+            $formData = $request->getBody();
             try {
                 $registerUser->register($formData);
 
