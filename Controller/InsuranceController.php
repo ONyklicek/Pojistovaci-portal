@@ -30,13 +30,10 @@ class InsuranceController extends Controller
         $insuredModel = new InsuranceModel();
         $data = $insuredModel->getInsurance($request->getRouteParam('id'));
 
-        bdump($data);
-
-
         if(Application::isAdmin() OR $request->getUserId() == $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']) {
             return self::render(__FUNCTION__, $head, $data);
         } else {
-            echo 'Nejsi oprávněný';
+            Application::$app->response->redirect('/404');
         }
     }
 
