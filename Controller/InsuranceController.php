@@ -99,7 +99,7 @@ class InsuranceController extends Controller
         return self::render(__FUNCTION__, $head, $productData);
     }
 
-    public function editInsurance(Request $request): mixed
+    public function editInsurance(Request $request): array|string
     {
         $head = [
           'title' => 'Editace pojištění'
