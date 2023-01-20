@@ -18,4 +18,4 @@ jobs:
       uses: php-actions/phpstan@v3
       with:
         path: Config Controller Core Model Public Views
-        level: 5
+        level: 6
