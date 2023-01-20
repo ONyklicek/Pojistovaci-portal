@@ -192,18 +192,6 @@ class Router implements StatusCodeInterface, RequestMethodInterface
     }
 
     /**
-     * Získání obsahu a zabezpečení šablony
-     *
-     * @param string $view
-     * @param array|string $data
-     * @return false|string|null
-     */
-    protected function renderViewOnly(string $view, array|string $data): String|False|Null
-    {
-        return Application::$app->view->renderViewOnly($view, $data);
-    }
-
-    /**
      * Získání požadavku URL
      *
      * @return Request

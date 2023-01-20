@@ -62,9 +62,9 @@ abstract class DbModel extends Model
      *
      * @param string $table Název tabulky
      * @param array $parameters
-     * @return bool
+     * @return bool|int
      */
-    public static function insert(string $table, array $parameters = []) : bool
+    public static function insert(string $table, array $parameters = []): bool|int
     {
         return self::query("INSERT INTO `$table` (`".
             implode('`, `', array_keys($parameters)).
@@ -78,10 +78,10 @@ abstract class DbModel extends Model
      * @param string $table Název tabulky
      * @param array $values Hodnoty ke změně
      * @param string $conditional Podmínka pro aktualizaci
-     * @param array $parametry
-     * @return bool
+     * @param array $parameter
+     * @return bool|int
      */
-    public static function update(string $table, array $values, string $conditional, array $parameter) : bool
+    public static function update(string $table, array $values, string $conditional, array $parameter): bool|int
     {
         return self::query("UPDATE `$table` SET ".
             implode('` = ?, `', array_keys($values)).
