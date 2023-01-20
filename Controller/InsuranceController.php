@@ -20,7 +20,6 @@ class InsuranceController extends Controller
     /**
      * Výpis pojištění
      * @param Request $request
-     * @return array|string|string[]|void
      */
     public function insurance(Request $request)
     {
