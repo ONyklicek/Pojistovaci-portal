@@ -7,19 +7,18 @@
         <div class="card shadow">
             <div class="card-body">
                 <form class=" row g-2 p-4" method="post">
-                <?php bdump($data) ?>
-                <div class="form-floating">
-                    <select class="form-select form-select-lg mb-3" name="product_id" aria-label="Název pojištění">
-                        <?php foreach ($data['DB'] ?? $data as $product): ?>
-                            <option value="<?= $product['product_id'] ?>" <?= ($product_id == $product['product_id']) ? 'selected' : null ?>"><?= $product['product_name'] ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <label for="floatingSelect">Název pojištění</label>
-                </div>
-
+                    <?php bdump($data) ?>
+                    <div class="form-floating">
+                        <select class="form-select form-select-lg mb-3" name="product_id" aria-label="Název pojištění">
+                            <?php foreach ($data['DB'] ?? $data as $product): ?>
+                                <option value="<?= $product['product_id'] ?>" <?= ($product_id == $product['product_id']) ? 'selected' : null ?>"><?= $product['product_name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <label for="floatingSelect">Název pojištění</label>
+                    </div>
 
                     <div class="col-md-3 input-group mb-3 form-floating">
-                        <input type="number" name="insurance_sum" id="floatingInput" placeholder="Částka" value="<?= (isset($insurance_sum)) ? $insurance_sum : null ?>" class="form-control form-control-lg"/>
+                        <input type="number" name="insurance_sum" id="floatingInput" placeholder="Částka" value="<?= (isset($insurance_sum)) ? $insurance_sum : null ?>" class="form-control form-control-lg" required/>
                         <label class="form-label">Částka</label>
                         <span class="input-group-text" id="basic-addon2">Kč</span>
                     </div>

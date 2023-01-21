@@ -73,7 +73,7 @@ class UserModel extends DbModel
 			SELECT user_id, user_email, user_telephone, user_firstname, user_lastname, user_password , user_type
 			FROM users
 			WHERE user_email = ? OR user_telephone  = ?
-		', array($login, $login));
+		', array($login, str_replace('+420', '',str_replace(' ', '', $login))));
         if (!$user){
             throw new \Exception(eMsgUser::ERR_INVALID_LOGIN->value);
 
