@@ -40,6 +40,10 @@ class SiteModel extends DbModel
         ');
     }
 
+    /**
+     * Výpis nejbližších 5 expirujících pojištění
+     * @return false|array
+     */
     public function adminDashboardExpiration(): false|array
     {
         return self::selectAll('
