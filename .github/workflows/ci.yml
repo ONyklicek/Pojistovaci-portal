@@ -13,15 +13,9 @@ jobs:
     steps:
     - name: Checkout project
       uses: actions/checkout@v3
-    - uses: php-actions/composer@v6 # or alternative dependency management
     - name: Run phpstan
       uses: php-actions/phpstan@v3
       with:
         path: Config Controller Core Model Public Views
         level: 5
-        
-      
-    - name: Danger PHP
-      # You may pin to the exact commit or the version.
-      # uses: shyim/danger-php@765828ea53324b79e132dc2c9e5bdad677b7d922
-      uses: shyim/danger-php@0.2.11
+
