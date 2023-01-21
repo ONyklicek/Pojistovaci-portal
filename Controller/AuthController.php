@@ -14,7 +14,6 @@ use App\Core\Controller;
 use App\Core\Messages\eMsgUser;
 use App\Core\Request;
 use App\Model\UserModel;
-use JetBrains\PhpStorm\NoReturn;
 
 class AuthController extends Controller
 {
@@ -52,7 +51,7 @@ class AuthController extends Controller
      * Odhlášení uživatele
      * @return void
      */
-    #[NoReturn] public function logout(): void
+    public function logout(): void
     {
         Application::$app->session->remove('user');
         Application::$app->session->setFlash('success', eMsgUser::MSG_LOGOUT->value);

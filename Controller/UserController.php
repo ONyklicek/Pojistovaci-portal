@@ -33,11 +33,11 @@ class UserController extends Controller
         $userModel = new UserModel();
         $userData = $userModel->getUser($request->getRouteParam('id'));
 
-        if(Application::isAdmin() OR $request->getRouteParam('id') == $request->getUserId()) {
-                return self::render(__FUNCTION__, $head, $userData);
-        } else {
+        if(!Application::isAdmin() && $request->getRouteParam('id') != $request->getUserId()) {
             Application::$app->response->redirect('/user/' . $request->getUserId());
+
         }
+        return self::render(__FUNCTION__, $head, $userData);
     }
 
 
@@ -55,9 +55,10 @@ class UserController extends Controller
         $userModel = new UserModel();
         $data = $userModel->getUsers();
 
-        if(Application::isAdmin()) {
-            return self::render(__FUNCTION__, $head, $data);
+        if(!Application::isAdmin()) {
+            Application::$app->response->redirect('/404');
         }
+        return self::render(__FUNCTION__, $head, $data);
     }
 
     /**
@@ -80,9 +81,9 @@ class UserController extends Controller
     /**
      * Editace uživatele
      * @param Request $request
-     * @return array|string|string[]|void
+     * @return array|string
      */
-    public function editUser(Request $request)
+    public function editUser(Request $request): array|string
     {
 
         self::isLogged();
@@ -121,9 +122,8 @@ class UserController extends Controller
     /**
      * Přidání uživatele
      * @param Request $request
-     * @return array|string
      */
-    public function addUser(Request $request): array|string
+    public function addUser(Request $request)
     {
         self::isLogged();
 

@@ -13,8 +13,6 @@ use App\Core\Controller;
 use App\Core\Application;
 use App\Core\Request;
 use App\Model\InsuranceModel;
-use App\Model\InsuredModel;
-use JetBrains\PhpStorm\NoReturn;
 
 class InsuranceController extends Controller
 {
@@ -144,7 +142,7 @@ class InsuranceController extends Controller
      * @param Request $request
      * @return void
      */
-    #[NoReturn] public function deleteInsurance(Request $request): void
+    public function deleteInsurance(Request $request): void
     {
         self::isLogged();
 
