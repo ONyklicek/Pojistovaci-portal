@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-5 border-bottom">
-    <h1 class="h2"><?= $title ?></h1>
+    <h2 class="h2"><?= $title ?></h2>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <a class="btn btn-success" href="/user/add" role="button">Přidat uživatele</a>
@@ -7,46 +7,54 @@
     </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Jméno</th>
-                <th scope="col">Email</th>
-                <th scope="col">Adresa</th>
-                <th scope="col">Typ uživatele</th>
-                <th scope="col"></th>
+<div class="row">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Jméno</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Adresa</th>
+                                <th scope="col">Typ uživatele</th>
+                                <th scope="col"></th>
 
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-            bdump($data);
-        ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            bdump($data);
+                        ?>
 
-        <?php foreach($data as $key => $value): ?>
-        <tr>
-            <td class="col-3"><?= $value['user_firstname'] . " " . $value['user_lastname']?></td>
-            <td class="col-3"><?= $value['user_email']?></td>
-            <td class="col-3"><?= ($value['user_address'])? $value['user_address'] . ', ' . $value['user_city'] : null ?></td>
-            <td class="col-2"><?= ($value['user_type'] == 0)? 'Admin': 'Pojistitel' ?></td>
-            <td clss="col-1">
-                <div class="btn-group">
-                    <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Zobrazit uživatele" href="/user/<?= $value['user_id'] ?>" role="button">
-                        <i data-feather="eye"></i>
-                    </a>
-                    <a class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upravit uživatele" href="/user/<?= $value['user_id'] ?>/edit" role="button">
-                        <i data-feather="edit"></i>
-                    </a>
-                    <a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Odstranit uživatele" href="/user/<?= $value['user_id'] ?>/delete" role="button">
-                        <i data-feather="trash-2"></i>
-                    </a>
+                        <?php foreach($data as $key => $value): ?>
+                        <tr>
+                            <td class="col-3"><?= $value['user_firstname'] . " " . $value['user_lastname']?></td>
+                            <td class="col-3"><?= $value['user_email']?></td>
+                            <td class="col-3"><?= ($value['user_address'])? $value['user_address'] . ', ' . $value['user_city'] : null ?></td>
+                            <td class="col-2"><?= ($value['user_type'] == 0)? 'Admin': 'Pojistitel' ?></td>
+                            <td clss="col-1">
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Zobrazit uživatele" href="/user/<?= $value['user_id'] ?>" role="button">
+                                        <i data-feather="eye"></i>
+                                    </a>
+                                    <a class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upravit uživatele" href="/user/<?= $value['user_id'] ?>/edit" role="button">
+                                        <i data-feather="edit"></i>
+                                    </a>
+                                    <a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Odstranit uživatele" href="/user/<?= $value['user_id'] ?>/delete" role="button">
+                                        <i data-feather="trash-2"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <?php endforeach; ?>
+
+                        </tbody>
+                    </table>
                 </div>
-            </td>
-        </tr>
-
-        <?php endforeach; ?>
-
-        </tbody>
-    </table>
+            </div>
+        </div>
+    </div>
 </div>

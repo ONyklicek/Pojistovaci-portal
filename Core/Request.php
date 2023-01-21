@@ -61,11 +61,26 @@ class Request implements RequestMethodInterface
 
     /**
      * Získání id uživatele
-     * @return int|null
+     * @return int|bool
      */
-    public function getUserId(): int|null
+    public function getUserId(): int|bool
     {
-        return $_SESSION['user']['user_id'];
+        if (isset($_SESSION['user']['user_id']))
+            return $_SESSION['user']['user_id'];
+        else
+            return false;
+    }
+
+    /**
+     * Kontrola přihlášení
+     * @return bool
+     */
+    public function isLogged(): bool
+    {
+        if (isset($_SESSION['user'])) {
+            return true;
+        }
+        return false;
     }
 
 

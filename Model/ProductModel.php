@@ -16,9 +16,9 @@ class ProductModel extends DbModel
 {
     /**
      * Výpis všech produktů
-     * @return array
+     * @return array|bool
      */
-    public function getProducts(): array
+    public function getProducts(): array|bool
     {
         return self::selectAll("SELECT * FROM `products` ORDER BY `product_id`");
     }
@@ -26,9 +26,9 @@ class ProductModel extends DbModel
     /**
      * Výpis produktu
      * @param int $id
-     * @return false|array
+     * @return array|bool
      */
-    public function getProduct(int $id): false|array
+    public function getProduct(int $id): array|bool
     {
         return self::selectOne("SELECT * 
                                     FROM `products` 
@@ -60,6 +60,7 @@ class ProductModel extends DbModel
      * @param int $id
      * @param array $product
      * @return void
+     * @throws \Exception
      */
     public function updateProduct(int $id, array $product): void
     {
@@ -81,6 +82,7 @@ class ProductModel extends DbModel
      * Odstranění produktu
      * @param int $id
      * @return void
+     * @throws \Exception
      */
     public function deleteProduct(int $id): void
     {

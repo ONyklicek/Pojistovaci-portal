@@ -16,9 +16,9 @@ class InsuranceModel extends DbModel
 {
     /**
      * Výpis aktivních produktů
-     * @return array
+     * @return array|bool
      */
-    public function getActiveProducts(): array
+    public function getActiveProducts(): array|bool
     {
         return self::selectAll("SELECT product_id, product_name FROM products WHERE product_active = true ORDER BY product_id");
     }
@@ -26,9 +26,9 @@ class InsuranceModel extends DbModel
     /**
      * Výpis pojištění
      * @param int $id
-     * @return array
+     * @return array|bool
      */
-    public function getInsurance(int $id): array
+    public function getInsurance(int $id): array|bool
     {
         return self::selectOne("SELECT u.user_lastname, u.user_firstname, p.product_name, insurance_start_date, insurance_end_date, insurance_sum, insurance_id
                                     FROM insurances 
@@ -39,9 +39,9 @@ class InsuranceModel extends DbModel
 
     /**
      * Výpis všech pojištění
-     * @return array
+     * @return array|bool
      */
-    public function getAllInsurances(): array
+    public function getAllInsurances(): array|bool
     {
         return self::selectAll("SELECT u.user_lastname, u.user_firstname, p.product_name, insurance_end_date, insurance_sum, insurance_id
                                     FROM insurances 
@@ -52,9 +52,9 @@ class InsuranceModel extends DbModel
 
     /** Výpis pojištění dle ID uživatele
      * @param int $id ID uživatele
-     * @return array
+     * @return array|bool
      */
-    public function getUserInsurances(int $id): array
+    public function getUserInsurances(int $id): array|bool
     {
         return self::selectAll("SELECT u.user_lastname, u.user_firstname, p.product_name, insurance_end_date, insurance_sum, insurance_id
                                     FROM insurances 
@@ -67,9 +67,9 @@ class InsuranceModel extends DbModel
     /**
      * Získání uživatelského ID pojištění
      * @param int $id ID pojištění
-     * @return array
+     * @return array|bool
      */
-    public function getUserIdInsurance(int $id): array
+    public function getUserIdInsurance(int $id): array|bool
     {
         return self::selectOne("SELECT user_id 
                                     FROM insurances 

@@ -18,17 +18,25 @@ class Controller
      * Vrátí pohled (voláno z Controlleru)
      *
      * @param string $view
-     * @param array $data
+     * @param array $head
+     * @param array|null $data
      * @return array|string|string[]
      */
-    public function render(string $view, array $head = [], ?array $data = [])
+    public function render(string $view, array $head = [], ?array $data = []): array|string
     {
         return Application::$app->router->renderView($view, $head, $data);
     }
 
+    public function isLogged(): void
+    {
+        if (!Application::$app->request->isLogged()) {
+            Application::$app->response->redirect('/login');
+        }
+
+    }
+
     /**
-     * Nastavení layout
-     *
+     * Nastavení layoutu
      * @return string
      */
     public function getLayout(): string
@@ -36,9 +44,10 @@ class Controller
         return $this->layout;
     }
 
+
+
     /**
      * Záskání layout
-     *
      * @param string $layout
      */
     public function setLayout(string $layout): void
@@ -48,7 +57,6 @@ class Controller
 
     /**
      * Získaní action (funkce volaná routrem)
-     *
      * @return string|null
      */
     public function getAction(): string|null
@@ -58,7 +66,6 @@ class Controller
 
     /**
      * Nastavení action (funkce volaná routrem)
-     *
      * @param string|null $action
      */
     public function setAction(string|null $action): void

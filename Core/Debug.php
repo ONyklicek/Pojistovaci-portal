@@ -11,7 +11,7 @@ namespace App\Core;
 
 use Tracy\Debugger;
 
-final class Debuger
+final readonly class Debug
 {
     public function __construct()
     {

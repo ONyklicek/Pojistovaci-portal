@@ -13,16 +13,19 @@ use App\Core\Application;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Model\UserModel;
+use JetBrains\PhpStorm\NoReturn;
 
 class UserController extends Controller
 {
     /**
      * Výpis uživatele
      * @param Request $request
-     * @return array|string|string[]|void
+     * @return array|string
      */
-    public function user(Request $request)
+    public function user(Request $request): array|string
     {
+        self::isLogged();
+
         $head = [
             'title' => 'Uživatel'
         ];
@@ -30,31 +33,32 @@ class UserController extends Controller
         $userModel = new UserModel();
         $userData = $userModel->getUser($request->getRouteParam('id'));
 
-        if(Application::isAdmin() OR $request->getRouteParam('id') == $request->getUserId()) {
-                return self::render(__FUNCTION__, $head, $userData);
-        } else {
+        if(!Application::isAdmin() && $request->getRouteParam('id') != $request->getUserId()) {
             Application::$app->response->redirect('/user/' . $request->getUserId());
+
         }
+        return self::render(__FUNCTION__, $head, $userData);
     }
 
 
     /**
      * Výpis všech uživatelů
-     * @return array|string|string[]|void
+     * @return array|string
      */
-    public function users()
+    public function users(): array|string
     {
+        self::isLogged();
+
         $head = [
             'title' => "Uživatelé"
         ];
         $userModel = new UserModel();
         $data = $userModel->getUsers();
 
-        if(Application::isAdmin()) {
-            return self::render(__FUNCTION__, $head, $data);
-        } else {
+        if(!Application::isAdmin()) {
             Application::$app->response->redirect('/404');
         }
+        return self::render(__FUNCTION__, $head, $data);
     }
 
     /**
@@ -63,6 +67,8 @@ class UserController extends Controller
      */
     public function insureds(): array|string
     {
+        self::isLogged();
+
         $head = [
             'title' => "Pojištěnci"
         ];
@@ -75,10 +81,11 @@ class UserController extends Controller
     /**
      * Editace uživatele
      * @param Request $request
-     * @return array|string|string[]|void
      */
     public function editUser(Request $request)
     {
+
+        self::isLogged();
 
         $head = [
             'title' => 'Editace uživatele',
@@ -114,16 +121,19 @@ class UserController extends Controller
     /**
      * Přidání uživatele
      * @param Request $request
-     * @return array|string|string[]|void
      */
     public function addUser(Request $request)
     {
+        self::isLogged();
+
         $head = [
             'title' => 'Přidání nového uživatele',
         ];
 
         $userModel = new UserModel();
         $formData = $request->getBody();
+
+
 
         if(Application::isAdmin()) {
             if ($request->isPost()) {
@@ -152,6 +162,8 @@ class UserController extends Controller
      */
     public function deleteUser(Request $request): void
     {
+        self::isLogged();
+
         $userModel = new UserModel();
         $userModel->deleteUser($request->getRouteParam('id'));
 

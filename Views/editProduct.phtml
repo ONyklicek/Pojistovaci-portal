@@ -1,20 +1,31 @@
-<h2><?= $title ?></h2>
-<form class="form row g-2" method="post">
-    <div class="form-floating">
-        <input type="text" name="product_name" placeholder="Název pojištění" required value="<?= (isset($product_name)) ? $product_name : null ?>" id="floatingInput" class="form-control form-control-lg" />
-        <label class="form-label" for="form3Example3cg">Název pojištění</label>
-    </div>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-5 border-bottom">
+    <h1 class="h2"><?= $title ?></h1>
+</div>
 
-    <div class="form-floating">
-        <select class="form-select form-select-lg mb-3" name="product_active" aria-label="Aktivní">
-            <option <?= isset($product_active) && ($product_active == 1)? 'selected': '' ?> value="1">Ano</option>
-            <option <?= isset($product_active) && ($product_active == 0)? 'selected': null ?>  value="0">Ne</option>
-        </select>
-        <label for="floatingSelect">Aktivní</label>
-    </div>
+<div class="row">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-body">
+                <form class="form row g-2 p-4" method="post">
+                    <div class="form-floating">
+                        <input type="text" name="product_name" placeholder="Název pojištění" value="<?= (isset($product_name)) ? $product_name : null ?>" id="floatingInput" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="form3Example3cg">Název pojištění</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <select class="form-select form-select-lg mb-3" name="product_active" aria-label="Aktivní">
+                            <option <?= isset($product_active) && ($product_active == 1)? 'selected': '' ?> value="1">Ano</option>
+                            <option <?= isset($product_active) && ($product_active == 0)? 'selected': null ?>  value="0">Ne</option>
+                        </select>
+                        <label for="floatingSelect">Aktivní</label>
+                    </div>
 
 
-    <div class="d-flex justify-content-center col-12">
-        <button type="submit" class="btn btn-primary">Uložit</button>
+                    <div class="d-flex justify-content-center col-12">
+                        <button type="submit" class="btn btn-primary">Uložit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</form>
+</div>

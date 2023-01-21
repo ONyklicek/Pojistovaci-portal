@@ -18,9 +18,9 @@ class UserModel extends DbModel
 {
     /**
      * Výpis všech uživatelů
-     * @return array
+     * @return array|bool
      */
-    public function getUsers(): array
+    public function getUsers(): array|bool
     {
         return self::selectAll("SELECT * FROM users ORDER BY `user_id`");
     }
@@ -28,9 +28,9 @@ class UserModel extends DbModel
     /**
      * Výpis skupiny uživatelů
      * @param int $id ID skupiny uživatelů
-     * @return array
+     * @return array|bool
      */
-    public function getUsersGroup(int $id): array
+    public function getUsersGroup(int $id): array|bool
     {
         return self::selectAll("SELECT `user_id`,`user_email`,`user_firstname`,`user_lastname`,`user_address`, `user_city`, `user_psc` 
                                     FROM `users` 
@@ -42,9 +42,9 @@ class UserModel extends DbModel
     /**
      * Výpis uživatele dle ID
      * @param int $id ID uživatele
-     * @return array
+     * @return array|bool
      */
-    public function getUser(int $id): array
+    public function getUser(int $id): array|bool
     {
         return self::selectOne("SELECT * 
                                     FROM users

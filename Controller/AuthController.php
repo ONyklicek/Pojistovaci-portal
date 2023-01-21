@@ -20,10 +20,9 @@ class AuthController extends Controller
     /**
      * Přihlášení uživatele
      * @param Request $request
-     * @return string
-     * @throws \Exception
+     * @return array|string
      */
-    public function login(Request $request): string
+    public function login(Request $request): array|string
     {
         $head = [
             'title' => 'Přihlášení'
@@ -62,9 +61,9 @@ class AuthController extends Controller
     /**
      * Registrace uživatele
      * @param Request $request
-     * @return string
+     * @return array|string
      */
-    public function register(Request $request): string
+    public function register(Request $request): array|string
     {
         $head = [
             'title' => 'Registrace'

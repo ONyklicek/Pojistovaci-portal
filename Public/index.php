@@ -2,12 +2,12 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Core\Debuger;
+use App\Core\Debug;
 use App\Core\Bootstrap;
 use App\Core\Application;
 use App\Core\Database\Database;
 (new Bootstrap());
-(new Debuger());
+(new Debug());
 
 $app = new Application(dirname(__DIR__));
 
