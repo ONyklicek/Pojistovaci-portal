@@ -8,10 +8,12 @@
 
 Projekt je inspirován frameworky jako Nette, nebo Laravel. 
 
-----
-----
+
 
 - Náhled
 
 ----
 ![](https://github.com/ONyklicek/Pojistovaci-portal/blob/main/screens/Screenshot%202023-01-21%20at%2015-34-58%20Poji%C5%A1%C5%A5ovac%C3%AD%20port%C3%A1l%20Dashboard.png?raw=true)
+
+
+![image](https://user-images.githubusercontent.com/60318239/213872534-0bd570c5-5b82-4004-ac25-5c86f46a4a70.png)
