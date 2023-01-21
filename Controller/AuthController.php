@@ -14,16 +14,16 @@ use App\Core\Controller;
 use App\Core\Messages\eMsgUser;
 use App\Core\Request;
 use App\Model\UserModel;
+use JetBrains\PhpStorm\NoReturn;
 
 class AuthController extends Controller
 {
     /**
      * Přihlášení uživatele
      * @param Request $request
-     * @return string
-     * @throws \Exception
+     * @return array|string
      */
-    public function login(Request $request): string
+    public function login(Request $request): array|string
     {
         $head = [
             'title' => 'Přihlášení'
@@ -52,7 +52,7 @@ class AuthController extends Controller
      * Odhlášení uživatele
      * @return void
      */
-    public function logout(): void
+    #[NoReturn] public function logout(): void
     {
         Application::$app->session->remove('user');
         Application::$app->session->setFlash('success', eMsgUser::MSG_LOGOUT->value);
@@ -62,9 +62,9 @@ class AuthController extends Controller
     /**
      * Registrace uživatele
      * @param Request $request
-     * @return string
+     * @return array|string
      */
-    public function register(Request $request): string
+    public function register(Request $request): array|string
     {
         $head = [
             'title' => 'Registrace'

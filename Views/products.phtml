@@ -1,43 +1,51 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-5 border-bottom">
-    <h1 class="h2">Produkty</h1>
+<h2 class="h2"><?= $title ?></h2>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <a class="btn btn-success" href="/product/add" role="button">Přidat produkt</a>
         </div>
     </div>
 </div>
-<div class="table-responsive">
-    <table class="table table-sm">
-        <thead>
-        <tr>
-            <th scope="col">Název produktu</th>
-            <th scope="col">Popis</th>
-            <th scope="col">Aktivní</th>
-            <th scope="col"> </th>
+<div class="row">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">Název produktu</th>
+                            <th scope="col">Popis</th>
+                            <th scope="col">Aktivní</th>
+                            <th scope="col"> </th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach($data as $key => $value): ?>
-            <tr>
-                <td class="col-3"><?= $value['product_name']?></td>
-                <td class="col"><?= $value['product_desc'] ?></td>
-                <td class="col-1"><?= ($value['product_active'])? 'Ano' : 'Ne' ?></td>
-                <td class="col-1">
-                    <div class="btn-group">
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($data as $key => $value): ?>
+                            <tr>
+                                <td class="col-3"><?= $value['product_name']?></td>
+                                <td class="col"><?= $value['product_desc'] ?></td>
+                                <td class="col-1"><?= ($value['product_active'])? 'Ano' : 'Ne' ?></td>
+                                <td class="col-1">
+                                    <div class="btn-group">
 
-                        <a class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upravit produkt" href="/product/<?= $value['product_id'] ?>/edit" role="button">
-                            <i data-feather="edit"></i>
-                        </a>
-                        <a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Odstranit produkt" href="/product/<?= $value['product_id'] ?>/delete" role="button">
-                            <i data-feather="trash-2"></i>
-                        </a>
-                    </div>
-                </td>
-            </tr>
+                                        <a class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upravit produkt" href="/product/<?= $value['product_id'] ?>/edit" role="button">
+                                            <i data-feather="edit"></i>
+                                        </a>
+                                        <a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Odstranit produkt" href="/product/<?= $value['product_id'] ?>/delete" role="button">
+                                            <i data-feather="trash-2"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
 
-        <?php endforeach; ?>
+                        <?php endforeach; ?>
 
-        </tbody>
-    </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

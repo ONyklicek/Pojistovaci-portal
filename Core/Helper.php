@@ -90,9 +90,14 @@ class Helper
     public static function productEnd($endDate): string
     {
         if($endDate < self::currentDate())
-            return 'Vyplšela';
+            return 'Skončilo';
 
         $diff = date_diff(date_create(self::currentDate()), date_create($endDate));
         return $diff->format('%a dní');
+    }
+
+    public static function amount($number)
+    {
+        return number_format($number, 0, ' ', ' ') . ' Kč';
     }
 }

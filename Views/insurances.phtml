@@ -8,49 +8,56 @@
 </div>
 
 <?php if($data): ?>
+<div class="row">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <?php if(\App\Core\Application::isAdmin()): ?><th scope="col">Jméno</th><?php endif; ?>
+                            <th scope="col">Název pojištění</th>
+                            <th scope="col">Částka</th>
+                            <th scope="col">Skončí za</th>
+                            <th scope="col"></th>
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-        <tr>
-            <?php if(\App\Core\Application::isAdmin()): ?><th scope="col">Jméno</th><?php endif; ?>
-            <th scope="col">Název pojištění</th>
-            <th scope="col">Částka</th>
-            <th scope="col">Skončí za</th>
-            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        bdump($data);
+                        ?>
 
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        bdump($data);
-        ?>
+                        <?php foreach($data as $key): ?>
+                            <tr>
+                                <?php if(\App\Core\Application::isAdmin()): ?><td class="col-2"><?= $key['user_firstname'] . " " . $key['user_lastname']?></td> <?php endif; ?>
+                                <td class="col-7"><?= $key['product_name']?></td>
+                                <td class="col-2"><?= $key['insurance_sum'] ?></td>
+                                <td class="col-2"><?= \App\Core\Helper::productEnd($key['insurance_end_date']) ?></td>
+                                <td clss="col-1">
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Zobrazit pojištění" href="/insurance/<?= $key['insurance_id'] ?>" role="button">
+                                            <i data-feather="eye"></i>
+                                        </a>
+                                        <a class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upravit pojištění" href="/insurance/<?= $key['insurance_id'] ?>/edit" role="button">
+                                            <i data-feather="edit"></i>
+                                        </a>
+                                        <a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Odstranit pojištění" href="/insurance/<?= $key['insurance_id'] ?>/delete" role="button">
+                                            <i data-feather="trash-2"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
 
-        <?php foreach($data as $key): ?>
-            <tr>
-                <?php if(\App\Core\Application::isAdmin()): ?><td class="col-2"><?= $key['user_firstname'] . " " . $key['user_lastname']?></td> <?php endif; ?>
-                <td class="col-7"><?= $key['product_name']?></td>
-                <td class="col-2"><?= $key['insurance_sum'] ?></td>
-                <td class="col-2"><?= \App\Core\Helper::productEnd($key['insurance_end_date']) ?></td>
-                <td clss="col-1">
-                    <div class="btn-group">
-                        <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Zobrazit pojištění" href="/insurance/<?= $key['insurance_id'] ?>" role="button">
-                            <i data-feather="eye"></i>
-                        </a>
-                        <a class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upravit pojištění" href="/insurance/<?= $key['insurance_id'] ?>/edit" role="button">
-                            <i data-feather="edit"></i>
-                        </a>
-                        <a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Odstranit pojištění" href="/insurance/<?= $key['insurance_id'] ?>/delete" role="button">
-                            <i data-feather="trash-2"></i>
-                        </a>
-                    </div>
-                </td>
-            </tr>
+                        <?php endforeach; ?>
 
-        <?php endforeach; ?>
-
-        </tbody>
-    </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <?php else: ?>
     <p>Prozatím nemáte sjednaná žádná pojištnění</p>

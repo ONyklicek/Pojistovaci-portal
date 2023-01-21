@@ -26,9 +26,9 @@ class InsuranceModel extends DbModel
     /**
      * Výpis pojištění
      * @param int $id
-     * @return array
+     * @return false|array
      */
-    public function getInsurance(int $id): array
+    public function getInsurance(int $id): false|array
     {
         return self::selectOne("SELECT u.user_lastname, u.user_firstname, p.product_name, insurance_start_date, insurance_end_date, insurance_sum, insurance_id
                                     FROM insurances 
@@ -67,9 +67,9 @@ class InsuranceModel extends DbModel
     /**
      * Získání uživatelského ID pojištění
      * @param int $id ID pojištění
-     * @return array
+     * @return false|array
      */
-    public function getUserIdInsurance(int $id): array
+    public function getUserIdInsurance(int $id): false|array
     {
         return self::selectOne("SELECT user_id 
                                     FROM insurances 

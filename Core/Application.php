@@ -8,7 +8,6 @@
  */
 namespace App\Core;
 
-use App\Core\Database\Database;
 
 class Application
 {
@@ -20,7 +19,7 @@ class Application
     public Request $request;
     public Response $response;
     public Session $session;
-    public Controller|Null $controller = null;
+    public Controller|null $controller = null;
     public View $view;
 
     public function __construct(string $rootPath)
@@ -166,13 +165,32 @@ class Application
         }
     }
 
+
+    /**
+     * Kontrola přihlášení
+     * @return bool
+     */
+    public function isGuest(): bool
+    {
+        if (empty($_SESSION['user'])) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Spuštění aplikace
      *
      * @return void
+     * @throws \Exception
      */
     public function run() : void
     {
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $e) {
+            throw new \Exception(''. $e->getMessage());
+        }
+
     }
 }

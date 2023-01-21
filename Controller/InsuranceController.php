@@ -14,6 +14,7 @@ use App\Core\Application;
 use App\Core\Request;
 use App\Model\InsuranceModel;
 use App\Model\InsuredModel;
+use JetBrains\PhpStorm\NoReturn;
 
 class InsuranceController extends Controller
 {
@@ -21,22 +22,21 @@ class InsuranceController extends Controller
     /**
      * Výpis pojištění
      * @param Request $request
-     * @return string
+     * @return array|string
      */
-    public function insurance(Request $request): string
+    public function insurance(Request $request): array|string
     {
+        self::isLogged();
+
         $head = [
             'title' => 'Detail pojištění'
         ];
         $insuredModel = new InsuranceModel();
         $data = $insuredModel->getInsurance($request->getRouteParam('id'));
 
-
-
-        $perm = (!Application::isAdmin() || ($request->getUserId() == $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']));
-
         if(!Application::isAdmin() && $request->getUserId() != $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']) {
             Application::$app->response->redirect('/404');
+
         }
         return self::render(__FUNCTION__, $head, $data);
     }
@@ -44,10 +44,12 @@ class InsuranceController extends Controller
     /**
      * Výpis všech pojištění
      * @param Request $request
-     * @return string
+     * @return array|string
      */
-    public function insurances(Request $request): string
+    public function insurances(Request $request): array|string
     {
+        self::isLogged();
+
         $insuredModel = new InsuranceModel();
 
         $head = [
@@ -65,9 +67,9 @@ class InsuranceController extends Controller
     /**
      * Přidání pojištění
      * @param Request $request
-     * @return string
+     * @return array|string
      */
-    public function addInsurance(Request $request): string
+    public function addInsurance(Request $request): array|string
 
     {
         $head = [
@@ -103,11 +105,13 @@ class InsuranceController extends Controller
     /**
      * Editace pojištění
      * @param Request $request
-     * @return string
+     * @return array|string
      */
-    public function editInsurance(Request $request): string
+    public function editInsurance(Request $request): array|string
 
     {
+        self::isLogged();
+
         $head = [
           'title' => 'Editace pojištění'
         ];
@@ -140,8 +144,10 @@ class InsuranceController extends Controller
      * @param Request $request
      * @return void
      */
-    public function deleteInsurance(Request $request): void
+    #[NoReturn] public function deleteInsurance(Request $request): void
     {
+        self::isLogged();
+
         $insuredModel = new InsuranceModel();
 
         if(!Application::isAdmin() && $request->getUserId() != $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']) {

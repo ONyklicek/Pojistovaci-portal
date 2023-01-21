@@ -13,16 +13,19 @@ use App\Core\Application;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Model\UserModel;
+use JetBrains\PhpStorm\NoReturn;
 
 class UserController extends Controller
 {
     /**
      * Výpis uživatele
      * @param Request $request
-     * @return array|string|string[]|void
+     * @return array|string
      */
-    public function user(Request $request)
+    public function user(Request $request): array|string
     {
+        self::isLogged();
+
         $head = [
             'title' => 'Uživatel'
         ];
@@ -40,10 +43,12 @@ class UserController extends Controller
 
     /**
      * Výpis všech uživatelů
-     * @return array|string|string[]|void
+     * @return array|string
      */
-    public function users()
+    public function users(): array|string
     {
+        self::isLogged();
+
         $head = [
             'title' => "Uživatelé"
         ];
@@ -52,8 +57,6 @@ class UserController extends Controller
 
         if(Application::isAdmin()) {
             return self::render(__FUNCTION__, $head, $data);
-        } else {
-            Application::$app->response->redirect('/404');
         }
     }
 
@@ -63,6 +66,8 @@ class UserController extends Controller
      */
     public function insureds(): array|string
     {
+        self::isLogged();
+
         $head = [
             'title' => "Pojištěnci"
         ];
@@ -79,6 +84,8 @@ class UserController extends Controller
      */
     public function editUser(Request $request)
     {
+
+        self::isLogged();
 
         $head = [
             'title' => 'Editace uživatele',
@@ -114,16 +121,20 @@ class UserController extends Controller
     /**
      * Přidání uživatele
      * @param Request $request
-     * @return array|string|string[]|void
+     * @return array|string
      */
-    public function addUser(Request $request)
+    public function addUser(Request $request): array|string
     {
+        self::isLogged();
+
         $head = [
             'title' => 'Přidání nového uživatele',
         ];
 
         $userModel = new UserModel();
         $formData = $request->getBody();
+
+
 
         if(Application::isAdmin()) {
             if ($request->isPost()) {
@@ -150,8 +161,10 @@ class UserController extends Controller
      * @param Request $request
      * @return void
      */
-    public function deleteUser(Request $request): void
+    #[NoReturn] public function deleteUser(Request $request): void
     {
+        self::isLogged();
+
         $userModel = new UserModel();
         $userModel->deleteUser($request->getRouteParam('id'));
 

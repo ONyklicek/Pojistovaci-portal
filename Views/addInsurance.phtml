@@ -2,36 +2,43 @@
     <h1 class="h2"><?= $title ?></h1>
 </div>
 
+<div class="row">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-body">
+                <form class=" row g-2 p-4" method="post">
+                <?php bdump($data) ?>
+                <div class="form-floating">
+                    <select class="form-select form-select-lg mb-3" name="product_id" aria-label="Název pojištění">
+                        <?php foreach ($data['DB'] ?? $data as $product): ?>
+                            <option value="<?= $product['product_id'] ?>" <?= ($product_id == $product['product_id']) ? 'selected' : null ?>"><?= $product['product_name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <label for="floatingSelect">Název pojištění</label>
+                </div>
 
-<form class=" row g-2" method="post">
-<?php bdump($data) ?>
-<div class="form-floating">
-    <select class="form-select form-select-lg mb-3" name="product_id" aria-label="Název pojištění">
-        <?php foreach ($data['DB'] ?? $data as $product): ?>
-            <option value="<?= $product['product_id'] ?>" <?= ($product_id == $product['product_id']) ? 'selected' : null ?>"><?= $product['product_name'] ?></option>
-        <?php endforeach; ?>
-    </select>
-    <label for="floatingSelect">Název pojištění</label>
+
+                    <div class="col-md-3 input-group mb-3 form-floating">
+                        <input type="number" name="insurance_sum" id="floatingInput" placeholder="Částka" value="<?= (isset($insurance_sum)) ? $insurance_sum : null ?>" class="form-control form-control-lg" required/>
+                        <label class="form-label">Částka</label>
+                        <span class="input-group-text" id="basic-addon2">Kč</span>
+                    </div>
+
+
+                    <div class="col-md-6 mb-3 form-floating">
+                        <input type="date" name="insurance_start_date" id="floatingInput" placeholder="Platné od" value="<?= (isset($insurance_start_date))? $insurance_start_date : \App\Core\Helper::currentDate() ?>" class="pb-05 form-control form-control" required/>
+                        <label class="form-label">Platné od</label>
+                    </div>
+                    <div class="col-md-6 form-floating">
+                        <input type="date" name="insurance_end_date" id="floatingInput" placeholder="Platné do" value="<?= (isset($insurance_end_date))? $insurance_end_date : \App\Core\Helper::currentDate('+1 day') ?>" class="pb-05 form-control form-control" required/>
+                        <label class="form-label">Platné do</label>
+                    </div>
+
+                    <div class="d-flex justify-content-center col-12 pt-4">
+                        <button type="submit" class="btn btn-primary">Sjednat pojištění</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-    <div class="col-md-3 input-group mb-3 form-floating">
-        <input type="number" name="insurance_sum" id="floatingInput" placeholder="Částka" value="<?= (isset($insurance_sum)) ? $insurance_sum : null ?>" class="form-control form-control-lg <?php //(isset($model->isError('firstName'))) ? 'is-invalid' : is-valid ?>" />
-        <label class="form-label">Částka</label>
-        <span class="input-group-text" id="basic-addon2">Kč</span>
-    </div>
-
-
-    <div class="col-md-6 mb-3 form-floating">
-        <input type="date" name="insurance_start_date" id="floatingInput" placeholder="Platné od" value="<?= (isset($insurance_start_date))? $insurance_start_date : \App\Core\Helper::currentDate() ?>" class="pb-05 form-control form-control" />
-        <label class="form-label">Platné od</label>
-    </div>
-    <div class="col-md-6 form-floating">
-        <input type="date" name="insurance_end_date" id="floatingInput" placeholder="Platné do" value="<?= (isset($insurance_end_date))? $insurance_end_date : \App\Core\Helper::currentDate('+1 day') ?>" class="pb-05 form-control form-control" />
-        <label class="form-label">Platné do</label>
-    </div>
-
-    <div class="d-flex justify-content-center col-12 pt-4">
-        <button type="submit" class="btn btn-primary">Sjednat pojištění</button>
-    </div>
-</form>

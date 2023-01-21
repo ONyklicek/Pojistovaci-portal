@@ -18,12 +18,14 @@ class ProductController extends Controller
 {
     /**
      * Výpis všech produktů
-     * @return string
+     * @return array|string
      */
-    public function products(): string
+    public function products(): array|string
     {
+        self::isLogged();
+
         $head = [
-            'title' => "Pojistky"
+            'title' => "Produkty"
         ];
         $userModel = new ProductModel();
         $data = $userModel->getProducts();
@@ -35,10 +37,12 @@ class ProductController extends Controller
     /**
      * Editace produktu
      * @param Request $request
-     * @return string
+     * @return array|string
      */
-    public function editProduct(Request $request): string
+    public function editProduct(Request $request): array|string
     {
+        self::isLogged();
+
         $requestId = $request->getRouteParam('id');
 
         if ($request->isPost()){
@@ -91,6 +95,8 @@ class ProductController extends Controller
      */
     public function deleteProduct(Request $request): void
     {
+        self::isLogged();
+
         $requestId = $request->getRouteParam('id');
         $productModel = new ProductModel();
 

@@ -9,6 +9,8 @@
 
 namespace App\Core;
 
+use JetBrains\PhpStorm\NoReturn;
+
 class Response
 {
     /**
@@ -26,8 +28,9 @@ class Response
      * @param string $url adresa požadované stránky
      * @return void
      */
-    public function redirect(string $url): void
+    #[NoReturn] public function redirect(string $url): void
     {
         header("Location: $url");
+        exit();
     }
 }

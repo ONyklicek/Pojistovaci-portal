@@ -6,9 +6,19 @@
         </div>
     </div>
 </div>
-<p>Jméno: <?= $user_firstname . " " .  $user_lastname ?></p>
-<p>Název produktu: <?= $product_name ?></p>
-<p>Částka: <?= $insurance_sum ?></p>
 
-<p>Datum narození: <?=  \App\Core\Helper::dateIsSet(\App\Core\Helper::date(($insurance_start_date)))?></p>
-<p>Datum narození: <?=  \App\Core\Helper::dateIsSet(\App\Core\Helper::date(($insurance_end_date)))?></p>
+<div class="row">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <p>Jméno: <?= $user_firstname . " " .  $user_lastname ?></p>
+                <p>Název produktu: <?= $product_name ?></p>
+                <p>Částka: <?= $insurance_sum ?></p>
+
+                <p>Datum narození: <?=  \App\Core\Helper::dateIsSet(\App\Core\Helper::date(($insurance_start_date)))?></p>
+                <p>Datum narození: <?=  \App\Core\Helper::dateIsSet(\App\Core\Helper::date(($insurance_end_date)))?></p>
+
+            </div>
+        </div>
+    </div>
+</div>
