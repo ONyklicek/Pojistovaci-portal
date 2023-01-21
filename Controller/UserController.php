@@ -81,9 +81,8 @@ class UserController extends Controller
     /**
      * Editace uživatele
      * @param Request $request
-     * @return array|string
      */
-    public function editUser(Request $request): array|string
+    public function editUser(Request $request)
     {
 
         self::isLogged();
@@ -161,7 +160,7 @@ class UserController extends Controller
      * @param Request $request
      * @return void
      */
-    #[NoReturn] public function deleteUser(Request $request): void
+    public function deleteUser(Request $request): void
     {
         self::isLogged();
 
