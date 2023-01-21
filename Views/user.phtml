@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-5 border-bottom">
-    <h2 class="h2">Detail uživatele</h1>
+    <h1 class="h2">Detail uživatele</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <a class="btn btn-warning" href="/user/<?= $user_id ?>/edit" role="button">Změna údajů</a>
@@ -11,10 +11,28 @@
     <div class="col">
         <div class="card shadow">
             <div class="card-body p-4">
-                <p>Jméno: <?= $user_firstname . " " .  $user_lastname ?></p>
-                <p>Email: <?= $user_email ?></p>
-                <p>Datum narození: <?=  \App\Core\Helper::dateIsSet(\App\Core\Helper::date(($user_birthdate)))?></p>
-                <p>Věk: <?= \App\Core\Helper::dateToOld($user_birthdate)?></p>
+                <div class="row">
+                    <div class="col-4">
+                        <img src="https://img.icons8.com/bubbles/300/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                    </div>
+
+                    <div class="col-8">
+                       <div class="row pt-4">
+                           <div class="col-12"><h3> <?= $user_firstname . " " .  $user_lastname ?></h3></div>
+                       </div>
+                        <div class="row pt-4">
+                            <div class="col-6"><strong>Email:</strong> <?= $user_email ?></div>
+                            <div class="col-6"><strong>Datum narození:</strong>  <?=  \App\Core\Helper::dateIsSet(\App\Core\Helper::date(($user_birthdate)))?></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"><strong>Telefon:</strong> <?= $user_telephone ?></div>
+                            <div class="col-6"><strong>Věk:</strong>  <?= \App\Core\Helper::dateToOld($user_birthdate)?></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"><strong>Adresa:</strong> <?= $user_address . ", " .  $user_city  .", ". $user_psc ?></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

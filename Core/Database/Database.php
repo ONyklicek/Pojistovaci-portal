@@ -13,8 +13,7 @@ use App\Core\Bootstrap;
 
 class Database
 {
-    public static $db;
-
+    public static object $db;
 
     /**
      * Připojení k databázi
@@ -28,7 +27,6 @@ class Database
             self::$db->setAttribute(\PDO::MYSQL_ATTR_INIT_COMMAND, "SET NAMES utf8");
             self::$db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
         }
-
     }
 
 

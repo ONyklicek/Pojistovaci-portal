@@ -25,27 +25,31 @@ use App\Core\Bootstrap;
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="/">Home</a>
-                    </li>
-                    <?php if(Application::isAdmin()): ?>
-                    <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="/users">Uživatelé</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/insureds">Pojištěnci</a>
-                    </li>
-                    <?php endif; ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/insurances">Pojištění</a>
-                    </li>
-                    <?php if(Application::isAdmin()): ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/products">Produkty</a>
-                    </li>
+                    <?php if(Application::$app->request->isLogged()): ?>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="/">Dashboard</a>
+                        </li>
+                        <?php if(Application::isAdmin()): ?>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="/users">Uživatelé</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/insureds">Pojištěnci</a>
+                        </li>
+                        <?php endif; ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/insurances">Pojištění</a>
+                        </li>
+                        <?php if(Application::isAdmin()): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/products">Produkty</a>
+                        </li>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </ul>
+
 
                 <ul class="navbar-nav">
                     <?php if (!isset($_SESSION['user'])): ?>

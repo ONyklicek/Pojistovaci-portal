@@ -36,7 +36,7 @@ class UserModel extends DbModel
                                     FROM `users` 
                                     WHERE `user_type` = ? 
                                     ORDER BY `user_id`"
-                        , array($id));
+                        , [$id]);
     }
 
     /**
@@ -49,7 +49,7 @@ class UserModel extends DbModel
         return self::selectOne("SELECT * 
                                     FROM users
                                     WHERE user_id = ? "
-            , array($id));
+            , [$id]);
     }
 
     /**
@@ -182,7 +182,7 @@ class UserModel extends DbModel
     public function deleteUser(int $id): void
     {
         self::query('DELETE FROM users 
-                        WHERE user_id = ? ', array($id));
+                        WHERE user_id = ? ', [$id]);
     }
 
     /**

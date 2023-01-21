@@ -20,7 +20,7 @@ class ProductModel extends DbModel
      */
     public function getProducts(): array|bool
     {
-        return self::selectAll("SELECT * FROM `products` ORDER BY `product_id`");
+        return self::selectAll("SELECT product_id, product_name, product_active FROM products ORDER BY product_id");
     }
 
     /**
@@ -30,10 +30,10 @@ class ProductModel extends DbModel
      */
     public function getProduct(int $id): array|bool
     {
-        return self::selectOne("SELECT * 
-                                    FROM `products` 
-                                    WHERE `product_id` = ? "
-            , parameters: array($id));
+        return self::selectOne("SELECT product_id, product_name, product_active 
+                                    FROM products
+                                    WHERE product_id = ? "
+            , array($id));
     }
 
     /**
