@@ -10,9 +10,11 @@
 namespace App\Controller;
 
 use App\Core\Application;
+use App\Core\ArrayHelper;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Model\SiteModel;
+use function _PHPStan_4dd92cd93\Symfony\Component\String\b;
 
 class SiteController extends Controller
 {
@@ -22,22 +24,26 @@ class SiteController extends Controller
      */
     public function home(Request $request): string
     {
-        if($request->isLogged()) {
-            if (Application::isAdmin()) {
-                $head = [
-                    'title' => 'Dashboard'
-                ];
+        self::isLogged();
 
-                $siteModel = new SiteModel();
-                $data = $siteModel->adminDashboard();
-                $data['end_insurances'] = $siteModel->adminDashboardExpiration();
-                bdump($data);
+        $head = [
+            'title' => 'Dashboard'
+        ];
 
-                return self::render('adminDashboard', $head, $data);
-            }
+        $siteModel = new SiteModel();
+        if (Application::isAdmin()) {
 
+            $data = array_merge(
+                $siteModel->adminDashboard(),
+                ArrayHelper::arrayPrefixed('end_insurances', $siteModel->adminDashboardExpiration())
+            );
+            return self::render('adminDashboard', $head, $data);
         }
 
-        return self::render('welcome');
+        $data = array_merge(
+            $siteModel->userDashboard($request->getUserId()),
+            ArrayHelper::arrayPrefixed('end_insurances', $siteModel->userDashboardExpiration($request->getUserId()))
+        );
+        return self::render('userDashboard', $head, $data);
     }
 }

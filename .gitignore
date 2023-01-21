@@ -1,2 +1,7 @@
-*/.idea/
-*.DS_Store
+.idea/
+.DS_Store
+phpinfo.php
+runtime/
+Tests/
+phpinfo.php
+.phpunit.result.cache

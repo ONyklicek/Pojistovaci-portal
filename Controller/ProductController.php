@@ -23,6 +23,9 @@ class ProductController extends Controller
     public function products(): array|string
     {
         self::isLogged();
+        if(!Application::isAdmin()){
+            Application::$app->response->redirect('/404');
+        }
 
         $head = [
             'title' => "Produkty"
@@ -30,9 +33,9 @@ class ProductController extends Controller
         $userModel = new ProductModel();
         $data = $userModel->getProducts();
 
+
         return self::render(__FUNCTION__, $head,  $data);
     }
-
 
     /**
      * Editace produktu
@@ -42,6 +45,9 @@ class ProductController extends Controller
     public function editProduct(Request $request): array|string
     {
         self::isLogged();
+        if(!Application::isAdmin()){
+            Application::$app->response->redirect('/404');
+        }
 
         $requestId = $request->getRouteParam('id');
 
@@ -95,6 +101,9 @@ class ProductController extends Controller
      */
     public function deleteProduct(Request $request): void
     {
+        if(!Application::isAdmin()){
+            Application::$app->response->redirect('/404');
+        }
         self::isLogged();
 
         $requestId = $request->getRouteParam('id');
@@ -108,6 +117,7 @@ class ProductController extends Controller
             Application::$app->session->setFlash('warning', $e->getMessage());
             Application::$app->response->redirect('/products');
         }
+
     }
 
 }

@@ -57,4 +57,42 @@ class SiteModel extends DbModel
         ');
 
     }
+
+    public function userDashboard(int $id): false|array
+    {
+        return self::selectOne(sql: '
+                SELECT  (
+                    SELECT COUNT(*)
+                    FROM   insurances
+                    WHERE user_id = ?
+                ) AS tot_count_insurances,
+                (    SELECT COUNT(*)
+                     FROM  insurances
+                     WHERE user_id = ? AND insurance_end_date >= CURDATE()
+                )AS tot_active_insurances,
+                (
+                    SELECT SUM(insurance_sum)
+                    FROM insurances
+                    WHERE user_id = ?
+                ) AS tot_su_insurances
+        ', parameters: [$id, $id, $id]);
+    }
+
+    /**
+     * Výpis nejbližších 5 expirujících pojištění
+     * @return false|array
+     */
+    public function userDashboardExpiration(int $id): false|array
+    {
+        return self::selectAll("
+            SELECT u.user_firstname, u.user_lastname, p.product_name, insurance_id, insurance_sum, insurance_end_date
+            FROM insurances
+            INNER JOIN products p on insurances.product_id = p.product_id
+            INNER JOIN users u on insurances.user_id = u.user_id
+            WHERE insurances.user_id = ? AND insurance_end_date >= CURDATE()
+            ORDER BY insurance_end_date ASC 
+            LIMIT 5
+        ", [$id]);
+
+    }
 }

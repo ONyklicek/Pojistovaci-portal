@@ -9,6 +9,7 @@
 
 namespace App\Controller;
 
+use App\Core\ArrayHelper;
 use App\Core\Controller;
 use App\Core\Application;
 use App\Core\Request;
@@ -68,28 +69,31 @@ class InsuranceController extends Controller
      * @return array|string
      */
     public function addInsurance(Request $request): array|string
-
     {
         $head = [
             'title' => 'Sjednání nového pojištění'
         ];
-
-        $userId['user_id'] = $request->getUserId();
-        bdump($userId);
 
         $insuredModel = new InsuranceModel();
         $productData = $insuredModel->getActiveProducts();
 
         if($request->isPost()){
             try {
-                $data = array_merge($request->getBody(), $userId);
+                $data = array_merge(
+                    $request->getBody(),
+                    ArrayHelper::arrayCreate('user_id', $request->getUserId())
+                );
                 $insuredModel->addInsurance($data);
 
                 Application::$app->session->setFlash('success', 'Pojištění bylo úspěšně sjednáno');
                 Application::$app->response->redirect('/insurances');
             } catch (\Exception $e){
-                $data = $request->getBody();
-                $data['DB'] = $productData;
+
+                $data = array_merge(
+                    $request->getBody(),
+                    ArrayHelper::arrayPrefixed('DB', $productData)
+                );
+
 
                 Application::$app->session->setFlash('warning', $e->getMessage());
 
@@ -110,13 +114,17 @@ class InsuranceController extends Controller
     {
         self::isLogged();
 
+        if(!Application::isAdmin()){
+            Application::$app->response->redirect('/insurance/'.$request->getRouteParam('id'));
+        }
+
         $head = [
           'title' => 'Editace pojištění'
         ];
 
         $insuredModel = new InsuranceModel();
 
-        if(!Application::isAdmin() && $request->getUserId() != $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']) {
+        if(!Application::isAdmin()) {
             Application::$app->session->setFlash('warning', 'Pro editaci tohoto pojistění nemáte dostatečná oprávnění.');
             Application::$app->response->redirect('/insurances');
         }
@@ -148,7 +156,7 @@ class InsuranceController extends Controller
 
         $insuredModel = new InsuranceModel();
 
-        if(!Application::isAdmin() && $request->getUserId() != $insuredModel->getUserIdInsurance($request->getRouteParam('id'))['user_id']) {
+        if(!Application::isAdmin()) {
             Application::$app->session->setFlash('warning', 'Pro odstranění tohoto pojistění nemáte dostatečná oprávnění.');
         } else {
             $insuredModel->deleteInsurance($request->getRouteParam('id'));

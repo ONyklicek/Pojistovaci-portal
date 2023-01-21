@@ -40,12 +40,14 @@
                                         <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Zobrazit pojištění" href="/insurance/<?= $key['insurance_id'] ?>" role="button">
                                             <i data-feather="eye"></i>
                                         </a>
+                                        <?php if(\App\Core\Application::isAdmin()): ?>
                                         <a class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upravit pojištění" href="/insurance/<?= $key['insurance_id'] ?>/edit" role="button">
                                             <i data-feather="edit"></i>
                                         </a>
                                         <a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Odstranit pojištění" href="/insurance/<?= $key['insurance_id'] ?>/delete" role="button">
                                             <i data-feather="trash-2"></i>
                                         </a>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>

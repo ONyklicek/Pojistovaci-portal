@@ -1,0 +1,1 @@
+{"version":1,"defects":{"App\\Core\\ArrayHelperTest::testArrayPrefixed":3,"App\\Core\\ArrayHelperTest::testArrayPrefixed3":3,"App\\Core\\ArrayHelperTest::testArrayPrefixed2":3},"times":{"App\\Core\\ArrayHelperTest::testArrayPrefixed":0.069,"App\\Core\\ArrayHelperTest::testArrayPrefixed2":0.001,"App\\Core\\ArrayHelperTest::testArrayPrefixed3":0}}

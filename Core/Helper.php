@@ -15,15 +15,15 @@ class Helper
 {
     /**
      * Formát data dd.mm.yyyy
-     * @param  string $date vstupní datum
-     * @return string
+     * @param string|null $date vstupní datum
+     * @return string|null
      */
-    public static function date(string $date): string
+    public static function date(?string $date): ?string
     {
         if (!$date) {
-            return '';
+            return null;
         } elseif ($date === '0000-00-00') {
-            return '';
+            return null;
         }
         return date('d.m.Y', strtotime($date));
     }
@@ -54,7 +54,7 @@ class Helper
      * @param string $date
      * @return string|null
      */
-    public static function dateIsSet(string $date): ?string
+    public static function dateIsSet(?string $date): ?string
     {
         if ($date == '0000-00-00') {
             return '';
@@ -65,10 +65,10 @@ class Helper
 
     /**
      * Převod datunu na věk
-     * @param string $date vstupní datum narození
+     * @param string|null $date vstupní datum narození
      * @return string|null
      */
-    public static function dateToOld(string $date): ?string
+    public static function dateToOld(?string $date): ?string
     {
         if ($date == '0000-00-00') {
             return null;
