@@ -24,15 +24,16 @@
                         <div class="row pt-4">
                             <div class="col-12"><h3> <?= $product_name ?></h3></div>
                         </div>
+
                         <div class="row pt-4">
                             <div class="col-6"><strong>Pojištěnec:</strong> <?= $user_firstname . " " .  $user_lastname ?></div>
                             <div class="col-6"><strong>Částka:</strong>  <?= \App\Core\Helper::amount($insurance_sum) ?></div>
                         </div>
+
                         <div class="row">
                             <div class="col-6"><strong>Platné od:</strong> <?=  \App\Core\Helper::dateIsSet(\App\Core\Helper::date(($insurance_start_date)))?></div>
                             <div class="col-6"><strong>Platné do:</strong>  <?=  \App\Core\Helper::dateIsSet(\App\Core\Helper::date(($insurance_end_date)))?></div>
                         </div>
-
                     </div>
                 </div>
             </div>
