@@ -6,7 +6,7 @@ MySQL:
     password: root
 
 DevMode:
-  TracyBar: false
-  ServerData: false
+  TracyBar: true
+  ServerData: true
 
 AplicationName: Pojišťovací portál

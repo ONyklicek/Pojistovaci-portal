@@ -14,7 +14,6 @@ use App\Core\Controller;
 use App\Core\Messages\eMsgUser;
 use App\Core\Request;
 use App\Model\UserModel;
-
 class AuthController extends Controller
 {
     /**

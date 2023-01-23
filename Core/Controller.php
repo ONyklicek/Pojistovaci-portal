@@ -29,6 +29,7 @@ class Controller
 
     public function isLogged(): void
     {
+        Application::$app->session->sessionUserValid();
         if (!Application::$app->request->isLogged()) {
             Application::$app->response->redirect('/login');
         }

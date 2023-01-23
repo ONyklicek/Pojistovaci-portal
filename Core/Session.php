@@ -9,6 +9,8 @@
 
 namespace App\Core;
 
+use App\Model\UserModel;
+
 class Session
 {
     protected const FLASH_KEY = 'flash_messages';
@@ -48,6 +50,7 @@ class Session
             $_SESSION[$key] = $value;
     }
 
+
     public function get($key)
     {
         return $_SESSION[$key] ?? false;
@@ -72,6 +75,22 @@ class Session
             }
         }
         $_SESSION[self::FLASH_KEY] = $flashMessages;
+    }
+
+    public function sessionUserValid()
+    {
+        $userModel = new UserModel();
+        $userData = $userModel->sessionValidData(Application::$app->request->getUserId());
+
+        bdump($userData);
+        bdump(self::get('user')['user_email']);
+        bdump($userData['user_email']);
+
+        foreach ($userData as $key => $value){
+            if(self::get('user')[$key] != $userData[$key]){
+                $_SESSION['user'][$key] = $value;
+            }
+        }
     }
 
 }
