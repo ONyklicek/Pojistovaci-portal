@@ -46,7 +46,17 @@ class UserModel extends DbModel
      */
     public function getUser(int $id): array|bool
     {
-        return self::selectOne("SELECT * 
+        return self::selectOne(sql: "SELECT * FROM users WHERE user_id = ? ", parameters: [$id]);
+    }
+
+    /**
+     * Validace dat Sessionu
+     * @param int $id ID uživatele
+     * @return array|bool
+     */
+    public function sessionValidData(int $id): array|bool
+    {
+        return self::selectOne("SELECT user_id, user_email, user_telephone, user_firstname, user_lastname, user_password , user_type
                                     FROM users
                                     WHERE user_id = ? "
             , [$id]);
