@@ -33,7 +33,7 @@
                             <td class="col-3"><?= $value['user_firstname'] . " " . $value['user_lastname']?></td>
                             <td class="col-3"><?= $value['user_email']?></td>
                             <td class="col-3"><?= ($value['user_address'])? $value['user_address'] . ', ' . $value['user_city'] : null ?></td>
-                            <td class="col-2"><?= ($value['user_type'] == 0)? 'Admin': 'Pojistitel' ?></td>
+                            <td class="col-2"><?= ($value['user_type'] == 0)? 'Admin': 'Pojištěnec' ?></td>
                             <td clss="col-1">
                                 <div class="btn-group">
                                     <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Zobrazit uživatele" href="/user/<?= $value['user_id'] ?>" role="button">
