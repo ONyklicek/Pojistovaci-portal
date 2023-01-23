@@ -1,4 +1,7 @@
-# Pojišťovací portal
+# Pojišťovací portal+
+
+spuštění webu vyžeduje instalaci composeru a potřebných modulů.
+
 
 [![PHP Composer](https://github.com/ONyklicek/Pojistovaci-portal/actions/workflows/php.yml/badge.svg)](https://github.com/ONyklicek/Pojistovaci-portal/actions/workflows/php.yml)
 [![PHPStan](https://github.com/ONyklicek/Pojistovaci-portal/actions/workflows/ci.yml/badge.svg)](https://github.com/ONyklicek/Pojistovaci-portal/actions/workflows/ci.yml)
