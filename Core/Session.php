@@ -45,18 +45,17 @@ class Session
      * @param string|array $value
      * @return void
      */
-    public function set($key, string|array $value)
+    public function set($key, string|array $value): void
     {
             $_SESSION[$key] = $value;
     }
 
-
-    public function get($key)
+    public function get($key): mixed
     {
         return $_SESSION[$key] ?? false;
     }
 
-    public function remove($key)
+    public function remove($key): void
     {
         unset($_SESSION[$key]);
     }
@@ -66,7 +65,7 @@ class Session
         $this->removeFlashMessages();
     }
 
-    private function removeFlashMessages()
+    private function removeFlashMessages(): void
     {
         $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
         foreach ($flashMessages as $key => $flashMessage) {
@@ -77,18 +76,16 @@ class Session
         $_SESSION[self::FLASH_KEY] = $flashMessages;
     }
 
-    public function sessionUserValid()
+    public function sessionUserValid(): void
     {
-        $userModel = new UserModel();
-        $userData = $userModel->sessionValidData(Application::$app->request->getUserId());
+        if(isset($_SESSION['user'])){
+            $userModel = new UserModel();
+            $userData = $userModel->sessionValidData(Application::$app->request->getUserId());
 
-        bdump($userData);
-        bdump(self::get('user')['user_email']);
-        bdump($userData['user_email']);
-
-        foreach ($userData as $key => $value){
-            if(self::get('user')[$key] != $userData[$key]){
-                $_SESSION['user'][$key] = $value;
+            foreach ($userData as $key => $value){
+                if(self::get('user')[$key] != $value){
+                    $_SESSION['user'][$key] = $value;
+                }
             }
         }
     }
