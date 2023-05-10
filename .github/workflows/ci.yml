@@ -19,4 +19,3 @@ jobs:
       with:
         path: Config Controller Core Model Public Views
         level: 5
-
