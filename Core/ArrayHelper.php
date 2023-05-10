@@ -9,8 +9,6 @@
 
 namespace App\Core;
 
-use function _PHPStan_4dd92cd93\Symfony\Component\String\b;
-
 class ArrayHelper
 {
     /**
