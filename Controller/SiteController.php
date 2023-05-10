@@ -14,7 +14,6 @@ use App\Core\ArrayHelper;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Model\SiteModel;
-use function _PHPStan_4dd92cd93\Symfony\Component\String\b;
 
 class SiteController extends Controller
 {
