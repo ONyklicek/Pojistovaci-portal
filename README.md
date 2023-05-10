@@ -1,4 +1,4 @@
-# Pojišťovací portal+
+# Pojišťovací portal
 
 Spuštění webu vyžeduje instalaci composeru a potřebných modulů.
 
